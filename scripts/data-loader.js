@@ -334,15 +334,16 @@
   function getRankByScore(year, score) {
     const rows = YEAR_DATA[year]?.rows;
     if (!rows) return null;
-    let lo = 0, hi = rows.length - 1;
-    while (lo <= hi) {
-      const mid = Math.floor((lo + hi) / 2);
-      if (rows[mid].score === score) return rows[mid];
-      if (rows[mid].score < score) lo = mid + 1;
-      else hi = mid - 1;
-    }
-    if (lo < rows.length) return rows[lo];
-    return rows[rows.length - 1] || null;
+    score = Number(score);
+    if (!Number.isFinite(score)) return null;
+    return rows.reduce((best, row) => {
+      if (!best) return row;
+      const currentGap = Math.abs(row.score - score);
+      const bestGap = Math.abs(best.score - score);
+      if (currentGap < bestGap) return row;
+      if (currentGap === bestGap && row.score > best.score) return row;
+      return best;
+    }, null);
   }
 
   function getScoreByRank(year, rank) {
@@ -377,6 +378,12 @@
     return { tier: 'tier-zhuan', label: '专科批', desc: '专科批高校' };
   }
 
+  function classifyByScore(year, score) {
+    const row = getRankByScore(year, score);
+    if (!row) return { tier: 'tier-zhuan', label: '未知', desc: '' };
+    return classifyByRank(year, row.cumulative);
+  }
+
   const YEAR_COLORS = {
     2022: '#ff6b6b', 2023: '#ffb84c', 2024: '#5dccaa', 2025: '#7cd9ff'
   };
@@ -397,6 +404,6 @@
   global.FJ_DATA = {
     getYears, getMeta, getData, getRows,
     getRankByScore, getScoreByRank,
-    classifyByRank, getColor, onReady, loadAll
+    classifyByRank, classifyByScore, getColor, onReady, loadAll
   };
 })(window);

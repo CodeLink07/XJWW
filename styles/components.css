@@ -664,6 +664,9 @@
   font-size: 11px;
   color: var(--text-tertiary);
   font-family: var(--font-mono);
+  max-width: 150px;
+  text-align: right;
+  line-height: 1.35;
 }
 
 .school-list {

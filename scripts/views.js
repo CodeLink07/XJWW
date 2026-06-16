@@ -4,6 +4,36 @@
   'use strict';
 
   const charts = {}; // 当前实例化的图表
+  let lastScoreQuery = null;
+  let lastRankQuery = null;
+  let lastCompareData = [];
+
+  function debounce(fn, delay = 120) {
+    let timer = null;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn(...args), delay);
+    };
+  }
+
+  function downloadCSV(filename, rows) {
+    if (!rows?.length) return;
+    const csv = '\ufeff' + rows.map(row =>
+      row.map(value => {
+        const text = String(value ?? '');
+        return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+      }).join(',')
+    ).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
 
   function destroyAllCharts() {
     Object.values(charts).forEach(c => c?.destroy());
@@ -166,13 +196,17 @@
       const scoreInput = document.getElementById('scoreInput');
       const scoreSlider = document.getElementById('scoreSlider');
       const scoreSliderVal = document.getElementById('scoreSliderVal');
-      scoreInput.addEventListener('input', () => {
+      const runScoreInput = debounce(() => {
         const v = +scoreInput.value;
         if (v >= 200 && v <= 750) {
           currentScore = v;
           doScoreQuery();
+        } else {
+          document.getElementById('scoreResult').innerHTML = '';
+          document.getElementById('scoreExportBtn').disabled = true;
         }
       });
+      scoreInput.addEventListener('input', runScoreInput);
       scoreInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
           currentScore = +scoreInput.value;
@@ -190,16 +224,21 @@
         currentScore = +scoreInput.value;
         doScoreQuery();
       });
+      document.getElementById('scoreExportBtn').addEventListener('click', exportScoreQueryCSV);
 
       // 绑定位次→分数事件
       const rankInput = document.getElementById('rankInput');
-      rankInput.addEventListener('input', () => {
+      const runRankInput = debounce(() => {
         const v = +rankInput.value;
         if (v >= 1) {
           currentRank = v;
           doRankQuery();
+        } else {
+          document.getElementById('rankResult').innerHTML = '';
+          document.getElementById('rankExportBtn').disabled = true;
         }
       });
+      rankInput.addEventListener('input', runRankInput);
       rankInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
           currentRank = +rankInput.value;
@@ -210,8 +249,10 @@
         currentRank = +rankInput.value;
         doRankQuery();
       });
+      document.getElementById('rankExportBtn').addEventListener('click', exportRankQueryCSV);
 
       // 默认触发一次查询
+      scoreInput.value = 580;
       doScoreQuery(580);
     });
   }
@@ -244,6 +285,7 @@
     const score = currentScore ?? +document.getElementById('scoreInput').value;
     if (!score || score < 200 || score > 750) {
       document.getElementById('scoreResult').innerHTML = '';
+      document.getElementById('scoreExportBtn').disabled = true;
       return;
     }
     currentScore = score;
@@ -251,6 +293,7 @@
     if (!year) return;
     currentQueryYear = year;
     const r = FJ_DATA.getRankByScore(year, score);
+    if (!r) return;
     const cls = FJ_DATA.classifyByRank(year, r.cumulative);
     const lines = FJ_DATA.getMeta().key_lines[year];
 
@@ -267,22 +310,24 @@
     `;
 
     ['rush', 'steady', 'safe'].forEach(mode => {
-      const modeLabel = mode === 'rush' ? '冲' : mode === 'steady' ? '稳' : '保';
-      const modeColor = mode === 'rush' ? '#ff8e3c' : mode === 'steady' ? '#5dccaa' : '#7cd9ff';
+      const meta = FJ_SCHOOLS.getFitMeta(mode);
+      const modeLabel = meta.label;
+      const modeColor = meta.color;
       const modeSchools = schools[mode];
       if (modeSchools.length > 0) {
         schoolsHtml += `
           <div class="school-section">
             <div class="school-section-header" style="--mode-color: ${modeColor};">
               <span class="mode-badge">${modeLabel}</span>
-              <span class="mode-count">${modeSchools.length} 所</span>
+              <span class="mode-count">${meta.desc}</span>
             </div>
             <div class="school-list">
-              ${modeSchools.slice(0, 5).map(school => `
+              ${modeSchools.slice(0, 6).map(school => `
                 <div class="school-card" title="${school.notes}">
                   <div class="school-name">${school.name}</div>
                   <div class="school-info">${school.location} · ${school.type}</div>
-                  <div class="school-rank">位次: ${school.minRank.toLocaleString()}-${school.maxRank.toLocaleString()}</div>
+                  <div class="school-rank">往年录取: ${school.minRank.toLocaleString()}-${school.maxRank.toLocaleString()} 名</div>
+                  <div class="school-rank">差值: ${school.rankGap >= 0 ? '+' : ''}${school.rankGap.toLocaleString()} 名 · 匹配度 ${school.confidence}</div>
                 </div>
               `).join('')}
             </div>
@@ -295,7 +340,7 @@
         </div>
         <div style="margin-top: 12px; padding: 12px; background: var(--bg-card-hover); border-radius: 8px; font-size: 12px; color: var(--text-tertiary);">
           <strong style="color: var(--text-secondary);">💡 填报建议：</strong>
-          <span style="margin-left: 4px;">"冲"为略高于当前位次的院校（搏一搏），"稳"为匹配位次的院校（把握大），"保"为位次安全的院校（保底）。建议志愿填报遵循"冲-稳-保"策略，合理分配志愿梯度。</span>
+          <span style="margin-left: 4px;">推荐按当前累计位次与院校往年录取位次区间进行匹配；同一所学校不同专业组差异较大，最终填报请再核对当年招生计划和专业组。</span>
         </div>
       </div>
     `;
@@ -328,6 +373,8 @@
       ${schoolsHtml}
     `;
     document.getElementById('scoreResult').innerHTML = html;
+    document.getElementById('scoreExportBtn').disabled = false;
+    lastScoreQuery = { year, score, row: r, cls, lines, schools };
 
     // 更新滑块
     const slider = document.getElementById('scoreSlider');
@@ -344,12 +391,14 @@
     const rank = currentRank ?? +document.getElementById('rankInput').value;
     if (!rank || rank < 1) {
       document.getElementById('rankResult').innerHTML = '';
+      document.getElementById('rankExportBtn').disabled = true;
       return;
     }
     currentRank = rank;
     const year = getActiveYear('queryYearPills');
     if (!year) return;
     const r = FJ_DATA.getScoreByRank(year, rank);
+    if (!r) return;
     const cls = FJ_DATA.classifyByRank(year, rank);
     const html = `
       <div class="result-grid">
@@ -369,11 +418,41 @@
       </div>
     `;
     document.getElementById('rankResult').innerHTML = html;
+    document.getElementById('rankExportBtn').disabled = false;
+    lastRankQuery = { year, rank, row: r, cls };
+  }
+
+  function exportScoreQueryCSV() {
+    if (!lastScoreQuery) return;
+    const { year, score, row, cls, schools } = lastScoreQuery;
+    const rows = [
+      ['类型', '年份', '输入分数', '匹配分数', '同分人数', '累计位次', '段位'],
+      ['分数查位次', year, score, row.score, row.count, row.cumulative, cls.label],
+      [],
+      ['推荐类型', '院校', '地区', '类型', '往年录取最低位次', '往年录取最高位次', '参考位次差', '匹配度']
+    ];
+    ['rush', 'steady', 'safe'].forEach(mode => {
+      (schools[mode] || []).forEach(s => {
+        rows.push([s.recommendationLabel || s.fitLabel, s.name, s.location, s.type, s.minRank, s.maxRank, s.rankGap, s.confidence]);
+      });
+    });
+    downloadCSV(`分数查询_${year}_${score}分.csv`, rows);
+  }
+
+  function exportRankQueryCSV() {
+    if (!lastRankQuery) return;
+    const { year, rank, row, cls } = lastRankQuery;
+    downloadCSV(`位次查询_${year}_${rank}名.csv`, [
+      ['类型', '年份', '输入位次', '对应分数', '同分人数', '累计位次', '段位'],
+      ['位次查分数', year, rank, row.score, row.count, row.cumulative, cls.label]
+    ]);
   }
 
   function refreshQueryCharts(year, score) {
     const lo = Math.max(200, score - 10);
     const hi = Math.min(750, score + 10);
+    const sub = document.getElementById('queryChartSub');
+    if (sub) sub.textContent = `${lo}–${hi} 分范围`;
     if (charts.queryCount) charts.queryCount.destroy();
     if (charts.queryCurve) charts.queryCurve.destroy();
     charts.queryCount = FJ_CHARTS.renderCountBar(document.getElementById('queryChart'), year, lo, hi);
@@ -429,6 +508,8 @@
       renderCompareYearPills();
       // 触发按钮
       document.getElementById('compareRunBtn').addEventListener('click', runCompare);
+      document.getElementById('compareExportBtn').addEventListener('click', exportCompareCSV);
+      document.getElementById('compareSliceInput').addEventListener('input', debounce(runCompare));
       document.getElementById('compareSliceInput').addEventListener('keydown', e => {
         if (e.key === 'Enter') runCompare();
       });
@@ -473,12 +554,14 @@
     years.forEach(y => {
       if (compareMode === 'score') {
         const r = FJ_DATA.getRankByScore(y, slice);
-        data.push({ year: y, count: r?.count || 0, cumulative: r?.cumulative || 0, score: slice });
+        data.push({ year: y, count: r?.count || 0, cumulative: r?.cumulative || 0, score: r?.score ?? slice });
       } else {
         const r = FJ_DATA.getScoreByRank(y, slice);
         data.push({ year: y, count: r?.count || 0, cumulative: slice, score: r?.score });
       }
     });
+    lastCompareData = data;
+    document.getElementById('compareExportBtn').disabled = false;
 
     // 更新标题
     if (compareMode === 'score') {
@@ -511,6 +594,7 @@
       return `
         <tr>
           <td><span class="year-pill" style="--year-color: ${color}; border-color: ${color}40; color: ${color}; padding: 2px 8px; font-size: 12px;"><span class="dot"></span>${d.year}</span></td>
+          <td>${d.score ?? '—'} 分</td>
           <td>${d.count.toLocaleString()} 人</td>
           <td>${d.cumulative.toLocaleString()} 名</td>
           <td class="${diff === 0 ? '' : diffClass}">${diffStr}</td>
@@ -529,6 +613,20 @@
       const minS = Math.min(...scores), maxS = Math.max(...scores);
       document.getElementById('compareHint').textContent = `位次 ${slice} 名在 ${years.length} 年间对应分数波动：${minS} – ${maxS} 分` + (maxS - minS > 0 ? `（差距 ${maxS - minS} 分）` : '');
     }
+  }
+
+  function exportCompareCSV() {
+    if (!lastCompareData.length) return;
+    const slice = +document.getElementById('compareSliceInput').value;
+    const label = compareMode === 'score' ? '分数' : '位次';
+    const rows = [
+      ['对比模式', '输入值'],
+      [label, slice],
+      [],
+      ['年份', '对应分数', '同分人数', '累计位次']
+    ];
+    lastCompareData.forEach(d => rows.push([d.year, d.score ?? '', d.count, d.cumulative]));
+    downloadCSV(`多年对比_${label}_${slice}.csv`, rows);
   }
 
   // ====================== 数据表格页 ======================

@@ -132,15 +132,35 @@
     return SCHOOL_TIERS[SCHOOL_TIERS.length - 1];
   }
 
-  // 根据位次获取冲稳保建议区间
+  function getAdmissionRank(school) {
+    return Math.round((school.minRank + school.maxRank) / 2);
+  }
+
+  function getFitLabel(rank, admissionRank) {
+    const gap = admissionRank - rank;
+    const ratio = gap / Math.max(rank, 1);
+    if (ratio < -0.18 || gap < -5000) return 'rush';
+    if (ratio <= 0.2 || gap <= 8000) return 'steady';
+    return 'safe';
+  }
+
+  function getFitMeta(mode) {
+    if (mode === 'rush') return { label: '冲', color: '#ff8e3c', desc: '往年录取位次略高于当前位次' };
+    if (mode === 'safe') return { label: '保', color: '#7cd9ff', desc: '往年录取位次明显低于当前位次' };
+    return { label: '稳', color: '#5dccaa', desc: '往年录取位次接近当前位次' };
+  }
+
+  // 根据当前位次动态计算冲稳保参考区间，避免固定档位误推。
   function getRushSteadySafe(rank) {
-    if (rank <= 200) return { rush: [1, 100], steady: [100, 200], safe: [200, 500] };
-    if (rank <= 1500) return { rush: [1, 800], steady: [800, 1500], safe: [1500, 3000] };
-    if (rank <= 6000) return { rush: [1, 3500], steady: [3500, 6000], safe: [6000, 10000] };
-    if (rank <= 18000) return { rush: [5000, 12000], steady: [12000, 18000], safe: [18000, 25000] };
-    if (rank <= 55000) return { rush: [25000, 45000], steady: [45000, 55000], safe: [55000, 75000] };
-    if (rank <= 130000) return { rush: [60000, 100000], steady: [100000, 130000], safe: [130000, 160000] };
-    return { rush: [130000, 180000], steady: [180000, 200000], safe: [200000, 250000] };
+    const r = Math.max(Number(rank) || 1, 1);
+    const tight = Math.max(300, Math.round(r * 0.08));
+    const medium = Math.max(1200, Math.round(r * 0.22));
+    const wide = Math.max(3500, Math.round(r * 0.45));
+    return {
+      rush: [Math.max(1, r - wide), Math.max(1, r - tight)],
+      steady: [Math.max(1, r - tight), r + medium],
+      safe: [r + medium, r + wide]
+    };
   }
 
   // 根据位次获取匹配的院校列表
@@ -162,20 +182,58 @@
         maxR = ranges.steady[1];
     }
 
-    return SCHOOLS.filter(s => {
-      return (s.minRank >= minR && s.minRank <= maxR) || 
-             (s.maxRank >= minR && s.maxRank <= maxR) ||
-             (s.minRank <= minR && s.maxRank >= maxR);
-    }).sort((a, b) => a.minRank - b.minRank);
+    const meta = getFitMeta(mode);
+    return rankSchools(rank)
+      .filter(s => rangesOverlap([s.minRank, s.maxRank], [minR, maxR]))
+      .map(s => ({
+        ...s,
+        recommendationMode: mode,
+        recommendationLabel: meta.label,
+        recommendationColor: meta.color,
+        recommendationDesc: meta.desc
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 12);
   }
 
   // 根据位次获取所有冲稳保院校
   function getRushSteadySafeSchools(rank) {
     return {
-      rush: getSchoolsByRank(rank, 'rush'),
-      steady: getSchoolsByRank(rank, 'steady'),
-      safe: getSchoolsByRank(rank, 'safe')
+      rush: getSchoolsByRank(rank, 'rush').slice(0, 6),
+      steady: getSchoolsByRank(rank, 'steady').slice(0, 6),
+      safe: getSchoolsByRank(rank, 'safe').slice(0, 6)
     };
+  }
+
+  function rangesOverlap(a, b) {
+    return a[0] <= b[1] && b[0] <= a[1];
+  }
+
+  function rankSchools(rank) {
+    const r = Math.max(Number(rank) || 1, 1);
+    const ranges = getRushSteadySafe(r);
+    return SCHOOLS.map(school => {
+      const admissionRank = getAdmissionRank(school);
+      const fit = getFitLabel(r, admissionRank);
+      const meta = getFitMeta(fit);
+      const distance = Math.abs(admissionRank - r);
+      const rankGap = admissionRank - r;
+      const inDynamicRange = rangesOverlap([school.minRank, school.maxRank], ranges[fit]);
+      return {
+        ...school,
+        admissionRank,
+        rankGap,
+        distance,
+        fit,
+        fitLabel: meta.label,
+        fitColor: meta.color,
+        fitDesc: meta.desc,
+        confidence: inDynamicRange ? '高' : '中'
+      };
+    }).sort((a, b) => {
+      const order = { steady: 0, rush: 1, safe: 2 };
+      return (order[a.fit] - order[b.fit]) || (a.distance - b.distance);
+    });
   }
 
   // 搜索院校
@@ -195,6 +253,9 @@
     getRushSteadySafe,
     getSchoolsByRank,
     getRushSteadySafeSchools,
+    rankSchools,
+    getAdmissionRank,
+    getFitMeta,
     searchSchools
   };
 })(window);

@@ -163,8 +163,11 @@
 
       <div class="card">
         <div class="card-head">
-          <h3>② 分数 → 位次</h3>
-          <span class="card-sub">输入分数，立即换算</span>
+          <div>
+            <h3>② 分数 → 位次</h3>
+            <span class="card-sub">输入分数，立即换算</span>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="scoreExportBtn" disabled>导出结果</button>
         </div>
         <div class="input-row">
           <input type="number" id="scoreInput" placeholder="例如 580" min="0" max="750">
@@ -180,8 +183,11 @@
 
       <div class="card">
         <div class="card-head">
-          <h3>③ 位次 → 分数</h3>
-          <span class="card-sub">输入位次，反向查分数</span>
+          <div>
+            <h3>③ 位次 → 分数</h3>
+            <span class="card-sub">输入位次，反向查分数</span>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="rankExportBtn" disabled>导出结果</button>
         </div>
         <div class="input-row">
           <input type="number" id="rankInput" placeholder="例如 10000" min="1">
@@ -254,15 +260,19 @@
     </div>
 
     <div class="card">
-      <div class="card-head">
-        <h3>对比结果</h3>
-        <span class="card-sub">各年数据明细</span>
+      <div class="card-head card-head-row">
+        <div>
+          <h3>对比结果</h3>
+          <span class="card-sub">各年数据明细</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="compareExportBtn" disabled>导出 CSV</button>
       </div>
       <div class="lines-table-wrap">
         <table class="data-table" id="compareResultTable">
           <thead>
             <tr>
               <th>年份</th>
+              <th>对应分数</th>
               <th>同分人数</th>
               <th>累计位次</th>
               <th>位次差 (vs 基准)</th>
