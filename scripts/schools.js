@@ -137,11 +137,7 @@
   }
 
   function getFitLabel(rank, admissionRank) {
-    const gap = admissionRank - rank;
-    const ratio = gap / Math.max(rank, 1);
-    if (ratio < -0.18 || gap < -5000) return 'rush';
-    if (ratio <= 0.2 || gap <= 8000) return 'steady';
-    return 'safe';
+    return classifyFitByGap(rank, admissionRank);
   }
 
   function getFitMeta(mode) {
@@ -155,10 +151,10 @@
     const r = Math.max(Number(rank) || 1, 1);
     const tight = Math.max(300, Math.round(r * 0.08));
     const medium = Math.max(1200, Math.round(r * 0.22));
-    const wide = Math.max(3500, Math.round(r * 0.45));
+    const wide = Math.max(3500, Math.round(r * 0.55));
     return {
       rush: [Math.max(1, r - wide), Math.max(1, r - tight)],
-      steady: [Math.max(1, r - tight), r + medium],
+      steady: [Math.max(1, r - tight), r + tight],
       safe: [r + medium, r + wide]
     };
   }
@@ -198,11 +194,56 @@
 
   // 根据位次获取所有冲稳保院校
   function getRushSteadySafeSchools(rank) {
-    return {
-      rush: getSchoolsByRank(rank, 'rush').slice(0, 6),
-      steady: getSchoolsByRank(rank, 'steady').slice(0, 6),
-      safe: getSchoolsByRank(rank, 'safe').slice(0, 6)
+    const buckets = { rush: [], steady: [], safe: [] };
+    const seen = new Set();
+    const ranked = rankSchools(rank);
+    const fillMode = (mode, predicate) => {
+      const meta = getFitMeta(mode);
+      ranked
+        .filter(s => !seen.has(s.name) && predicate(s))
+        .sort((a, b) => scoreForMode(a, mode) - scoreForMode(b, mode))
+        .forEach(s => {
+          if (buckets[mode].length >= 6 || seen.has(s.name)) return;
+          seen.add(s.name);
+          buckets[mode].push({
+            ...s,
+            recommendationMode: mode,
+            recommendationLabel: meta.label,
+            recommendationColor: meta.color,
+            recommendationDesc: meta.desc
+          });
+        });
     };
+
+    fillMode('steady', s => s.fit === 'steady');
+    fillMode('rush', s => s.fit === 'rush');
+    fillMode('safe', s => s.fit === 'safe');
+
+    // 数据库覆盖有限时补足列表，但同校仍然只出现一次。
+    fillMode('rush', s => s.rankGap < 0);
+    fillMode('safe', s => s.rankGap > 0);
+    fillMode('steady', () => true);
+
+    return buckets;
+  }
+
+  function classifyFitByGap(rank, admissionRank) {
+    const r = Math.max(Number(rank) || 1, 1);
+    const gap = admissionRank - r;
+    const absGap = Math.abs(gap);
+    const steadyBand = Math.max(600, Math.round(r * 0.1));
+    const safeBand = Math.max(1800, Math.round(r * 0.2));
+    if (absGap <= steadyBand) return 'steady';
+    if (gap < 0) return 'rush';
+    if (gap >= safeBand) return 'safe';
+    return 'steady';
+  }
+
+  function scoreForMode(school, mode) {
+    const gap = school.rankGap;
+    if (mode === 'rush') return Math.abs(gap) + (gap >= 0 ? 1000000 : 0);
+    if (mode === 'safe') return Math.abs(gap) + (gap <= 0 ? 1000000 : 0);
+    return Math.abs(gap);
   }
 
   function rangesOverlap(a, b) {

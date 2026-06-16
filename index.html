@@ -93,7 +93,7 @@
     <section class="section">
       <div class="section-head">
         <h2 class="section-title">关键数据看板</h2>
-        <span class="section-sub">点击卡片切换年份视图</span>
+        <span class="section-sub" id="overviewYearHint">点击卡片切换年份视图</span>
       </div>
       <div class="kpi-grid" id="kpiGrid"></div>
     </section>
@@ -101,7 +101,7 @@
     <section class="section">
       <div class="section-head">
         <h2 class="section-title">关键分数线</h2>
-        <span class="section-sub">每年录取控制线及对应位次</span>
+        <span class="section-sub" id="overviewLinesSub">每年录取控制线及对应位次</span>
       </div>
       <div class="lines-table-wrap">
         <table class="data-table lines-table">
@@ -124,21 +124,21 @@
 
     <section class="section">
       <div class="section-head">
-        <h2 class="section-title">600 分 · 四年对比</h2>
-        <span class="section-sub">同一分数在不同年份的位次变化</span>
+        <h2 class="section-title" id="overviewCompareTitle">600 分 · 四年对比</h2>
+        <span class="section-sub" id="overviewCompareSub">同一分数在不同年份的位次变化</span>
       </div>
       <div class="chart-grid chart-grid-2">
         <div class="chart-card">
           <div class="chart-card-head">
             <h3>同分人数</h3>
-            <span class="chart-card-sub">600 分的考生人数</span>
+            <span class="chart-card-sub" id="overviewCountSub">600 分的考生人数</span>
           </div>
           <div class="chart-canvas-wrap"><canvas id="ovCountChart"></canvas></div>
         </div>
         <div class="chart-card">
           <div class="chart-card-head">
             <h3>累计位次</h3>
-            <span class="chart-card-sub">600 分及以上的全省位次</span>
+            <span class="chart-card-sub" id="overviewCumSub">600 分及以上的全省位次</span>
           </div>
           <div class="chart-canvas-wrap"><canvas id="ovCumChart"></canvas></div>
         </div>
@@ -175,7 +175,7 @@
           <button class="btn btn-primary btn-sm" id="scoreQueryBtn">查询</button>
         </div>
         <div class="slider-row">
-          <input type="range" id="scoreSlider" min="220" max="700" value="580">
+          <input type="range" id="scoreSlider" min="220" max="750" value="580">
           <span class="slider-value" id="scoreSliderVal">580</span>
         </div>
         <div id="scoreResult" class="result-panel"></div>
@@ -346,7 +346,7 @@
         <ul class="about-list">
           <li>累计位次 = 该分数及以上所有考生人数之和</li>
           <li>数据已包含高考加分（同福建省教育考试院发布口径）</li>
-          <li>分数⇄位次换算采用二分查找，毫秒级响应</li>
+          <li>分数⇄位次换算按官方表格累计人数直接匹配，输入后即时响应</li>
           <li>若输入分数不在表中，自动取最近分数估算</li>
         </ul>
       </div>
@@ -370,7 +370,7 @@
   </template>
 
   <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="scripts/vendor/chart.umd.min.js"></script>
 
   <!-- 应用脚本 -->
   <script src="scripts/data-loader.js"></script>

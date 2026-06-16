@@ -43,19 +43,39 @@
     border: { display: false }
   };
 
+  function prepareCanvas(canvas) {
+    if (!canvas || typeof Chart === 'undefined') return null;
+    const existing = Chart.getChart?.(canvas);
+    if (existing) existing.destroy();
+    return canvas;
+  }
+
+  function scoreLabel(year, rowOrScore) {
+    if (!global.FJ_DATA?.formatScoreLabel) return String(rowOrScore?.score ?? rowOrScore);
+    const row = typeof rowOrScore === 'object' ? rowOrScore : { score: Number(rowOrScore) };
+    return FJ_DATA.formatScoreLabel(year, row);
+  }
+
   /**
    * 同分人数柱状图（单年）
    */
   function renderCountBar(canvas, year, scoreMin, scoreMax) {
+    canvas = prepareCanvas(canvas);
+    if (!canvas) return null;
     const data = FJ_DATA.getData(year);
     if (!data) return null;
-    const rows = data.rows.filter(r => r.score >= scoreMin && r.score <= scoreMax);
+    let rows = data.rows.filter(r => r.score >= scoreMin && r.score <= scoreMax);
+    const top = FJ_DATA.getTopBand?.(year);
+    if (top && scoreMax >= top.min && !rows.some(r => r.score === top.min)) {
+      const topRow = data.rows.find(r => r.score === top.min);
+      if (topRow) rows = [topRow, ...rows];
+    }
     const color = FJ_DATA.getColor(year);
 
     return new Chart(canvas, {
       type: 'bar',
       data: {
-        labels: rows.map(r => r.score),
+        labels: rows.map(r => scoreLabel(year, r)),
         datasets: [{
           data: rows.map(r => r.count),
           backgroundColor: rows.map(r => {
@@ -95,6 +115,8 @@
    * 分数-位次 累计曲线
    */
   function renderRankCurve(canvas, year) {
+    canvas = prepareCanvas(canvas);
+    if (!canvas) return null;
     const data = FJ_DATA.getData(year);
     if (!data) return null;
     const rows = data.rows;
@@ -114,7 +136,7 @@
     return new Chart(canvas, {
       type: 'line',
       data: {
-        labels: rows.map(r => r.score),
+        labels: rows.map(r => scoreLabel(year, r)),
         datasets: [{
           data: rows.map(r => r.cumulative),
           borderColor: color,
@@ -176,16 +198,19 @@
   /**
    * 多年同分人数对比（柱状）
    */
-  function renderCompareCount(canvas, compareData) {
+  function renderCompareCount(canvas, compareData, options = {}) {
+    canvas = prepareCanvas(canvas);
+    if (!canvas) return null;
+    const highlightYear = options.highlightYear ? Number(options.highlightYear) : null;
     return new Chart(canvas, {
       type: 'bar',
       data: {
         labels: compareData.map(d => d.year + '年'),
         datasets: [{
           data: compareData.map(d => d.count || 0),
-          backgroundColor: compareData.map(d => FJ_DATA.getColor(d.year) + 'cc'),
+          backgroundColor: compareData.map(d => FJ_DATA.getColor(d.year) + (highlightYear && d.year !== highlightYear ? '55' : 'cc')),
           borderColor: compareData.map(d => FJ_DATA.getColor(d.year)),
-          borderWidth: 1,
+          borderWidth: compareData.map(d => highlightYear && d.year === highlightYear ? 2 : 1),
           borderRadius: 6,
           barPercentage: 0.7
         }]
@@ -213,20 +238,23 @@
   /**
    * 多年累计位次对比（柱状/折线）
    */
-  function renderCompareCum(canvas, compareData, type = 'bar') {
+  function renderCompareCum(canvas, compareData, type = 'bar', options = {}) {
+    canvas = prepareCanvas(canvas);
+    if (!canvas) return null;
+    const highlightYear = options.highlightYear ? Number(options.highlightYear) : null;
     const cfg = {
       type,
       data: {
         labels: compareData.map(d => d.year + '年'),
         datasets: [{
           data: compareData.map(d => d.cumulative || 0),
-          backgroundColor: type === 'bar' ? compareData.map(d => FJ_DATA.getColor(d.year) + 'cc') : 'transparent',
-          borderColor: compareData.map(d => FJ_DATA.getColor(d.year)),
+          backgroundColor: type === 'bar' ? compareData.map(d => FJ_DATA.getColor(d.year) + (highlightYear && d.year !== highlightYear ? '55' : 'cc')) : 'transparent',
+          borderColor: type === 'bar' ? compareData.map(d => FJ_DATA.getColor(d.year)) : '#5dccaa',
           borderWidth: 2,
           borderRadius: type === 'bar' ? 6 : 0,
           fill: false,
           tension: 0.3,
-          pointRadius: 5,
+          pointRadius: compareData.map(d => highlightYear && d.year === highlightYear ? 7 : 5),
           pointBackgroundColor: compareData.map(d => FJ_DATA.getColor(d.year)),
           pointBorderColor: '#0a0e1a',
           pointBorderWidth: 2,
@@ -265,6 +293,8 @@
    * 多年同分人数叠加曲线（按分数）
    */
   function renderOverlay(canvas, years) {
+    canvas = prepareCanvas(canvas);
+    if (!canvas) return null;
     const datasets = years.map(y => {
       const data = FJ_DATA.getData(y);
       const color = FJ_DATA.getColor(y);

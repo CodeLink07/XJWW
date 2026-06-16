@@ -7,6 +7,7 @@
   let lastScoreQuery = null;
   let lastRankQuery = null;
   let lastCompareData = [];
+  let overviewSelectedYear = null;
 
   function debounce(fn, delay = 120) {
     let timer = null;
@@ -55,6 +56,8 @@
 
     // 1. Hero 统计
     renderHeroStats();
+
+    overviewSelectedYear = overviewSelectedYear || FJ_DATA.getYears().at(-1);
 
     // 2. KPI 卡片
     renderKPICards();
@@ -109,7 +112,7 @@
       // 600 分数据
       const r600 = FJ_DATA.getRankByScore(y, 600);
       return `
-        <div class="kpi-card" data-year="${y}" style="--year-color: ${color};">
+        <button class="kpi-card ${y === overviewSelectedYear ? 'active' : ''}" data-year="${y}" style="--year-color: ${color};" type="button" aria-pressed="${y === overviewSelectedYear}">
           <div class="kpi-year">${y}</div>
           <div class="kpi-row">
             <span class="kpi-row-label">特招线</span>
@@ -131,11 +134,25 @@
             <span class="kpi-row-label">考生总数</span>
             <span class="kpi-row-value">${(lines?.total_candidates / 10000).toFixed(1)}<span class="unit">万</span></span>
           </div>
-        </div>
+        </button>
       `;
     }).join('');
 
-    document.getElementById('kpiGrid').innerHTML = html;
+    const grid = document.getElementById('kpiGrid');
+    grid.innerHTML = html;
+    grid.addEventListener('click', e => {
+      const card = e.target.closest('.kpi-card[data-year]');
+      if (!card) return;
+      overviewSelectedYear = +card.dataset.year;
+      grid.querySelectorAll('.kpi-card').forEach(el => {
+        const active = +el.dataset.year === overviewSelectedYear;
+        el.classList.toggle('active', active);
+        el.setAttribute('aria-pressed', String(active));
+      });
+      renderLinesTable();
+      renderCompare600Charts();
+    });
+    updateOverviewLabels();
   }
 
   function renderLinesTable() {
@@ -149,7 +166,7 @@
       const zkRank = FJ_DATA.getRankByScore(y, lines?.zhuan_ke)?.cumulative;
       const color = FJ_DATA.getColor(y);
       return `
-        <tr>
+        <tr class="${y === overviewSelectedYear ? 'selected-year' : ''}" style="--year-color: ${color};">
           <td><span class="year-pill" style="--year-color: ${color}; border-color: ${color}40; color: ${color}; padding: 2px 8px; font-size: 12px;"><span class="dot"></span>${y}</span></td>
           <td>${lines?.te_zhao || '—'}</td>
           <td>${tzRank?.toLocaleString() || '—'}</td>
@@ -163,19 +180,36 @@
     }).join('');
 
     document.getElementById('linesTableBody').innerHTML = html;
+    updateOverviewLabels();
   }
 
   function renderCompare600Charts() {
     const years = FJ_DATA.getYears();
     const data = years.map(y => {
       const r = FJ_DATA.getRankByScore(y, 600);
-      return { year: y, count: r?.count || 0, cumulative: r?.cumulative || 0 };
+      return { year: y, count: r?.count || 0, cumulative: r?.cumulative || 0, score: r?.score ?? 600 };
     });
 
     if (charts.ovCount) charts.ovCount.destroy();
     if (charts.ovCum) charts.ovCum.destroy();
-    charts.ovCount = FJ_CHARTS.renderCompareCount(document.getElementById('ovCountChart'), data);
-    charts.ovCum = FJ_CHARTS.renderCompareCum(document.getElementById('ovCumChart'), data, 'line');
+    charts.ovCount = FJ_CHARTS.renderCompareCount(document.getElementById('ovCountChart'), data, { highlightYear: overviewSelectedYear });
+    charts.ovCum = FJ_CHARTS.renderCompareCum(document.getElementById('ovCumChart'), data, 'line', { highlightYear: overviewSelectedYear });
+    updateOverviewLabels();
+  }
+
+  function updateOverviewLabels() {
+    const year = overviewSelectedYear || FJ_DATA.getYears().at(-1);
+    const r600 = FJ_DATA.getRankByScore(year, 600);
+    const hint = document.getElementById('overviewYearHint');
+    const linesSub = document.getElementById('overviewLinesSub');
+    const compareSub = document.getElementById('overviewCompareSub');
+    const countSub = document.getElementById('overviewCountSub');
+    const cumSub = document.getElementById('overviewCumSub');
+    if (hint) hint.textContent = `当前查看 ${year} 年，点击其它卡片可切换`;
+    if (linesSub) linesSub.textContent = `${year} 年已高亮，表格保留四年对照`;
+    if (compareSub) compareSub.textContent = `${year} 年 600 分：同分 ${r600?.count?.toLocaleString() || '—'} 人，累计 ${r600?.cumulative?.toLocaleString() || '—'} 名`;
+    if (countSub) countSub.textContent = `${year} 年柱形会高亮`;
+    if (cumSub) cumSub.textContent = `${year} 年节点会高亮`;
   }
 
   // ====================== 分数查询页 ======================
@@ -196,58 +230,51 @@
       const scoreInput = document.getElementById('scoreInput');
       const scoreSlider = document.getElementById('scoreSlider');
       const scoreSliderVal = document.getElementById('scoreSliderVal');
-      const runScoreInput = debounce(() => {
+      const runScoreInput = () => {
         const v = +scoreInput.value;
         if (v >= 200 && v <= 750) {
-          currentScore = v;
-          doScoreQuery();
+          doScoreQuery(v);
         } else {
           document.getElementById('scoreResult').innerHTML = '';
           document.getElementById('scoreExportBtn').disabled = true;
         }
-      });
+      };
       scoreInput.addEventListener('input', runScoreInput);
       scoreInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
-          currentScore = +scoreInput.value;
-          doScoreQuery();
+          doScoreQuery(+scoreInput.value);
         }
       });
       scoreSlider.addEventListener('input', () => {
         const v = +scoreSlider.value;
         scoreSliderVal.textContent = v;
         scoreInput.value = v;
-        currentScore = v;
-        doScoreQuery();
+        doScoreQuery(v);
       });
       document.getElementById('scoreQueryBtn').addEventListener('click', () => {
-        currentScore = +scoreInput.value;
-        doScoreQuery();
+        doScoreQuery(+scoreInput.value);
       });
       document.getElementById('scoreExportBtn').addEventListener('click', exportScoreQueryCSV);
 
       // 绑定位次→分数事件
       const rankInput = document.getElementById('rankInput');
-      const runRankInput = debounce(() => {
+      const runRankInput = () => {
         const v = +rankInput.value;
         if (v >= 1) {
-          currentRank = v;
-          doRankQuery();
+          doRankQuery(v);
         } else {
           document.getElementById('rankResult').innerHTML = '';
           document.getElementById('rankExportBtn').disabled = true;
         }
-      });
+      };
       rankInput.addEventListener('input', runRankInput);
       rankInput.addEventListener('keydown', e => {
         if (e.key === 'Enter') {
-          currentRank = +rankInput.value;
-          doRankQuery();
+          doRankQuery(+rankInput.value);
         }
       });
       document.getElementById('rankQueryBtn').addEventListener('click', () => {
-        currentRank = +rankInput.value;
-        doRankQuery();
+        doRankQuery(+rankInput.value);
       });
       document.getElementById('rankExportBtn').addEventListener('click', exportRankQueryCSV);
 
@@ -281,8 +308,7 @@
   }
 
   function doScoreQuery(force) {
-    if (force != null) currentScore = force;
-    const score = currentScore ?? +document.getElementById('scoreInput').value;
+    const score = force != null ? Number(force) : Number(document.getElementById('scoreInput').value);
     if (!score || score < 200 || score > 750) {
       document.getElementById('scoreResult').innerHTML = '';
       document.getElementById('scoreExportBtn').disabled = true;
@@ -294,6 +320,8 @@
     currentQueryYear = year;
     const r = FJ_DATA.getRankByScore(year, score);
     if (!r) return;
+    const matchedScoreLabel = FJ_DATA.formatScoreLabel?.(year, r) || String(r.score);
+    const isEstimated = Number(score) !== Number(r.score) && !(score > r.score && matchedScoreLabel.includes('-'));
     const cls = FJ_DATA.classifyByRank(year, r.cumulative);
     const lines = FJ_DATA.getMeta().key_lines[year];
 
@@ -348,8 +376,9 @@
     const html = `
       <div class="result-grid">
         <div class="result-item">
-          <span class="result-item-label">分数</span>
+          <span class="result-item-label">输入分数</span>
           <span class="result-item-value accent">${score} <span style="font-size:13px; color: var(--text-tertiary);">分</span></span>
+          ${isEstimated ? `<span class="result-item-sub">按最近分段 ${matchedScoreLabel} 分估算</span>` : (matchedScoreLabel !== String(score) ? `<span class="result-item-sub">官方分段：${matchedScoreLabel} 分</span>` : '')}
         </div>
         <div class="result-item">
           <span class="result-item-label">同分人数</span>
@@ -374,7 +403,7 @@
     `;
     document.getElementById('scoreResult').innerHTML = html;
     document.getElementById('scoreExportBtn').disabled = false;
-    lastScoreQuery = { year, score, row: r, cls, lines, schools };
+    lastScoreQuery = { year, score, row: r, scoreLabel: matchedScoreLabel, cls, lines, schools };
 
     // 更新滑块
     const slider = document.getElementById('scoreSlider');
@@ -387,8 +416,8 @@
     refreshQueryCharts(year, score);
   }
 
-  function doRankQuery() {
-    const rank = currentRank ?? +document.getElementById('rankInput').value;
+  function doRankQuery(force) {
+    const rank = force != null ? Number(force) : Number(document.getElementById('rankInput').value);
     if (!rank || rank < 1) {
       document.getElementById('rankResult').innerHTML = '';
       document.getElementById('rankExportBtn').disabled = true;
@@ -399,6 +428,7 @@
     if (!year) return;
     const r = FJ_DATA.getScoreByRank(year, rank);
     if (!r) return;
+    const scoreLabel = FJ_DATA.formatScoreLabel?.(year, r) || String(r.score);
     const cls = FJ_DATA.classifyByRank(year, rank);
     const html = `
       <div class="result-grid">
@@ -408,7 +438,7 @@
         </div>
         <div class="result-item">
           <span class="result-item-label">对应分数</span>
-          <span class="result-item-value">${r.score}<span style="font-size:13px; color: var(--text-tertiary);"> 分</span></span>
+          <span class="result-item-value">${scoreLabel}<span style="font-size:13px; color: var(--text-tertiary);"> 分</span></span>
           <span class="result-item-sub">该分数同分 ${r.count.toLocaleString()} 人</span>
         </div>
         <div class="result-item">
@@ -419,15 +449,15 @@
     `;
     document.getElementById('rankResult').innerHTML = html;
     document.getElementById('rankExportBtn').disabled = false;
-    lastRankQuery = { year, rank, row: r, cls };
+    lastRankQuery = { year, rank, row: r, scoreLabel, cls };
   }
 
   function exportScoreQueryCSV() {
     if (!lastScoreQuery) return;
-    const { year, score, row, cls, schools } = lastScoreQuery;
+    const { year, score, row, scoreLabel, cls, schools } = lastScoreQuery;
     const rows = [
       ['类型', '年份', '输入分数', '匹配分数', '同分人数', '累计位次', '段位'],
-      ['分数查位次', year, score, row.score, row.count, row.cumulative, cls.label],
+      ['分数查位次', year, score, scoreLabel, row.count, row.cumulative, cls.label],
       [],
       ['推荐类型', '院校', '地区', '类型', '往年录取最低位次', '往年录取最高位次', '参考位次差', '匹配度']
     ];
@@ -441,10 +471,10 @@
 
   function exportRankQueryCSV() {
     if (!lastRankQuery) return;
-    const { year, rank, row, cls } = lastRankQuery;
+    const { year, rank, row, scoreLabel, cls } = lastRankQuery;
     downloadCSV(`位次查询_${year}_${rank}名.csv`, [
       ['类型', '年份', '输入位次', '对应分数', '同分人数', '累计位次', '段位'],
-      ['位次查分数', year, rank, row.score, row.count, row.cumulative, cls.label]
+      ['位次查分数', year, rank, scoreLabel, row.count, row.cumulative, cls.label]
     ]);
   }
 
@@ -509,7 +539,7 @@
       // 触发按钮
       document.getElementById('compareRunBtn').addEventListener('click', runCompare);
       document.getElementById('compareExportBtn').addEventListener('click', exportCompareCSV);
-      document.getElementById('compareSliceInput').addEventListener('input', debounce(runCompare));
+      document.getElementById('compareSliceInput').addEventListener('input', runCompare);
       document.getElementById('compareSliceInput').addEventListener('keydown', e => {
         if (e.key === 'Enter') runCompare();
       });
@@ -554,10 +584,10 @@
     years.forEach(y => {
       if (compareMode === 'score') {
         const r = FJ_DATA.getRankByScore(y, slice);
-        data.push({ year: y, count: r?.count || 0, cumulative: r?.cumulative || 0, score: r?.score ?? slice });
+        data.push({ year: y, count: r?.count || 0, cumulative: r?.cumulative || 0, score: r?.score ?? slice, scoreLabel: r ? FJ_DATA.formatScoreLabel?.(y, r) || String(r.score) : String(slice) });
       } else {
         const r = FJ_DATA.getScoreByRank(y, slice);
-        data.push({ year: y, count: r?.count || 0, cumulative: slice, score: r?.score });
+        data.push({ year: y, count: r?.count || 0, cumulative: slice, score: r?.score, scoreLabel: r ? FJ_DATA.formatScoreLabel?.(y, r) || String(r.score) : '—' });
       }
     });
     lastCompareData = data;
@@ -594,7 +624,7 @@
       return `
         <tr>
           <td><span class="year-pill" style="--year-color: ${color}; border-color: ${color}40; color: ${color}; padding: 2px 8px; font-size: 12px;"><span class="dot"></span>${d.year}</span></td>
-          <td>${d.score ?? '—'} 分</td>
+          <td>${d.scoreLabel ?? d.score ?? '—'} 分</td>
           <td>${d.count.toLocaleString()} 人</td>
           <td>${d.cumulative.toLocaleString()} 名</td>
           <td class="${diff === 0 ? '' : diffClass}">${diffStr}</td>
@@ -625,7 +655,7 @@
       [],
       ['年份', '对应分数', '同分人数', '累计位次']
     ];
-    lastCompareData.forEach(d => rows.push([d.year, d.score ?? '', d.count, d.cumulative]));
+    lastCompareData.forEach(d => rows.push([d.year, d.scoreLabel ?? d.score ?? '', d.count, d.cumulative]));
     downloadCSV(`多年对比_${label}_${slice}.csv`, rows);
   }
 
@@ -703,7 +733,7 @@
       const isHL = highlightScore === r.score;
       return `
         <tr class="${isHL ? 'highlighted' : ''}">
-          <td class="num">${r.score}</td>
+          <td class="num">${FJ_DATA.formatScoreLabel?.(tableYear, r) || r.score}</td>
           <td class="num">${r.count.toLocaleString()}</td>
           <td class="num">${r.cumulative.toLocaleString()}</td>
           <td>${cls ? `<span class="tier-badge ${cls.tier}">${cls.label}</span>` : ''}</td>
@@ -728,7 +758,7 @@
     const lines = FJ_DATA.getMeta().key_lines[tableYear];
     const body = rows.map(r => {
       const cls = FJ_DATA.classifyByScore(tableYear, r.score);
-      return `${r.score},${r.count},${r.cumulative},${cls?.label || ''}`;
+      return `${FJ_DATA.formatScoreLabel?.(tableYear, r) || r.score},${r.count},${r.cumulative},${cls?.label || ''}`;
     }).join('\n');
     const csv = '\ufeff' + header + body;
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });

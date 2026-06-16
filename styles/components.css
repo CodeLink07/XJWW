@@ -69,6 +69,8 @@
 }
 
 .kpi-card {
+  display: block;
+  width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -77,6 +79,9 @@
   cursor: pointer;
   transition: all 0.2s ease;
   overflow: hidden;
+  color: inherit;
+  font: inherit;
+  text-align: left;
 }
 
 .kpi-card::before {
@@ -99,6 +104,7 @@
 .kpi-card.active {
   border-color: var(--year-color, var(--accent-primary));
   background: linear-gradient(180deg, rgba(93, 204, 170, 0.04), var(--bg-card));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--year-color, var(--accent-primary)) 40%, transparent);
 }
 
 .kpi-year {
@@ -442,6 +448,11 @@
 .data-table tbody tr.highlighted {
   background: rgba(93, 204, 170, 0.1);
   box-shadow: inset 3px 0 0 var(--accent-primary);
+}
+
+.data-table tbody tr.selected-year {
+  background: rgba(93, 204, 170, 0.08);
+  box-shadow: inset 3px 0 0 var(--year-color, var(--accent-primary));
 }
 
 .data-table .text-right { text-align: right; }

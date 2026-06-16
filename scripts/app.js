@@ -14,10 +14,11 @@
   let currentChartSet = global.FJ_VIEWS ? null : null; // 占位
 
   function destroyAllCharts() {
-    // views.js 内部已经维护了 charts 对象；这里做一个兜底
-    if (typeof Chart !== 'undefined') {
-      Object.values(Chart.instances || {}).forEach(c => c && c.destroy && c.destroy());
-    }
+    if (typeof Chart === 'undefined' || typeof Chart.getChart !== 'function') return;
+    document.querySelectorAll('canvas').forEach(canvas => {
+      const chart = Chart.getChart(canvas);
+      if (chart) chart.destroy();
+    });
   }
 
   function getRoute() {
