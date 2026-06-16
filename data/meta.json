@@ -1,0 +1,43 @@
+{
+  "province": "福建",
+  "track": "物理类",
+  "subject_combinations": ["物化生", "物化地", "物化政", "物生地", "物生政", "物地政"],
+  "years": [2022, 2023, 2024, 2025],
+  "key_lines": {
+    "2022": {
+      "te_zhao": 520,
+      "ben_ke": 428,
+      "zhuan_ke": 220,
+      "total_candidates": 138000,
+      "source": "福建省教育考试院"
+    },
+    "2023": {
+      "te_zhao": 518,
+      "ben_ke": 431,
+      "zhuan_ke": 220,
+      "total_candidates": 165000,
+      "source": "福建省教育考试院"
+    },
+    "2024": {
+      "te_zhao": 518,
+      "ben_ke": 432,
+      "zhuan_ke": 220,
+      "total_candidates": 184000,
+      "source": "福建省教育考试院"
+    },
+    "2025": {
+      "te_zhao": 520,
+      "ben_ke": 441,
+      "zhuan_ke": 220,
+      "total_candidates": 192096,
+      "source": "福建省教育考试院"
+    }
+  },
+  "data_sources": [
+    { "year": 2022, "url": "https://www.eeafj.cn/gkptgkgsgg/20220625/12121.html", "label": "福建省教育考试院 2022 年高考考生成绩分布" },
+    { "year": 2023, "url": "https://www.eeafj.cn/gkptgkgsgg/20230625/12913.html", "label": "福建省教育考试院 2023 年高考考生成绩分布" },
+    { "year": 2024, "url": "https://www.eeafj.cn/gkptgkgsgg/20240625/13485.html", "label": "福建省教育考试院 2024 年高考考生成绩分布" },
+    { "year": 2025, "url": "https://www.fjdaily.com/app/content/2025-06/25/content_3384512.html", "label": "福建省教育考试院 2025 年高考考生成绩统计表" }
+  ],
+  "collection_note": "数据来源于福建省教育考试院原始公告及多家教育媒体（中国教育在线、福建日报等）整理，已交叉核对。最终以 eeafj.cn 官方公告为准。"
+}

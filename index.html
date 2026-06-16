@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>福建物理类 · 一分一段数据驾驶舱 | 2022–2025</title>
+  <meta name="description" content="福建省 2022–2025 年高考物理类一分一段表数据可视化、分数位次换算、多年对比与院校参考。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/charts.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0e1a'/><path d='M6 22 L12 14 L18 18 L26 8' stroke='%235dccaa' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/><circle cx='26' cy='8' r='2.5' fill='%237cd9ff'/></svg>">
+</head>
+<body>
+  <!-- ===== 背景装饰 ===== -->
+  <div class="bg-mesh"></div>
+  <div class="bg-noise"></div>
+
+  <!-- ===== 顶部导航 ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#/">
+        <span class="brand-mark">
+          <svg viewBox="0 0 32 32" width="22" height="22"><path d="M6 22 L12 14 L18 18 L26 8" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="26" cy="8" r="2.5" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">福建·物理类</span>
+          <span class="brand-sub">一分一段数据驾驶舱 · 2022–2025</span>
+        </span>
+      </a>
+      <nav class="nav">
+        <a class="nav-link" href="#/" data-route="#/">概览</a>
+        <a class="nav-link" href="#/query" data-route="#/query">分数查询</a>
+        <a class="nav-link" href="#/compare" data-route="#/compare">多年对比</a>
+        <a class="nav-link" href="#/table" data-route="#/table">详细数据</a>
+        <a class="nav-link" href="#/about" data-route="#/about">关于</a>
+      </nav>
+      <div class="topbar-meta">
+        <span class="status-dot" id="dataStatus" title="数据加载状态"></span>
+        <span class="topbar-meta-text" id="dataStatusText">加载中</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 主视图容器 ===== -->
+  <main id="view" class="view"></main>
+
+  <!-- ===== 页脚 ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <strong>数据来源</strong>
+        <span>福建省教育考试院 (eeafj.cn) 原始公告</span>
+        <span>中国教育在线、福建日报等媒体整理</span>
+      </div>
+      <div class="footer-col">
+        <strong>使用说明</strong>
+        <span>仅供学习与志愿参考，不构成志愿建议</span>
+        <span>数据以福建省教育考试院官方公告为准</span>
+      </div>
+      <div class="footer-col">
+        <strong>构建</strong>
+        <span>纯静态站点 · 2026–06–15</span>
+        <span>原生 JS + Chart.js</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== 视图模板 ===== -->
+
+  <!-- 概览页 -->
+  <template id="tpl-overview">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-eyebrow">FUJIAN · PHYSICS · GAOKAO 2022–2025</div>
+        <h1 class="hero-title">福建省高考<br>物理类一分一段表</h1>
+        <p class="hero-desc">
+          覆盖 <strong>2022–2025</strong> 四个年度的物理类高考成绩分布数据，提供分数⇄位次换算、多年对比、可视化分析与院校层级参考。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#/query">
+            <span>开始查询</span>
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#/compare">查看多年对比 →</a>
+        </div>
+      </div>
+      <div class="hero-stats" id="heroStats"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">关键数据看板</h2>
+        <span class="section-sub">点击卡片切换年份视图</span>
+      </div>
+      <div class="kpi-grid" id="kpiGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">关键分数线</h2>
+        <span class="section-sub">每年录取控制线及对应位次</span>
+      </div>
+      <div class="lines-table-wrap">
+        <table class="data-table lines-table">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>特招线</th>
+              <th>对应位次</th>
+              <th>本科线</th>
+              <th>对应位次</th>
+              <th>专科线</th>
+              <th>对应位次</th>
+              <th>考生总数</th>
+            </tr>
+          </thead>
+          <tbody id="linesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2 class="section-title">600 分 · 四年对比</h2>
+        <span class="section-sub">同一分数在不同年份的位次变化</span>
+      </div>
+      <div class="chart-grid chart-grid-2">
+        <div class="chart-card">
+          <div class="chart-card-head">
+            <h3>同分人数</h3>
+            <span class="chart-card-sub">600 分的考生人数</span>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="ovCountChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-head">
+            <h3>累计位次</h3>
+            <span class="chart-card-sub">600 分及以上的全省位次</span>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="ovCumChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+  </template>
+
+  <!-- 分数查询页 -->
+  <template id="tpl-query">
+    <section class="page-head">
+      <h1 class="page-title">分数⇄位次 换算</h1>
+      <p class="page-sub">输入分数或位次，立即看到所在分段、关键节点对照与近邻分数分布</p>
+    </section>
+
+    <div class="query-grid">
+      <div class="card">
+        <div class="card-head">
+          <h3>① 选择年份</h3>
+        </div>
+        <div class="year-pills" id="queryYearPills"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>② 分数 → 位次</h3>
+          <span class="card-sub">输入分数，立即换算</span>
+        </div>
+        <div class="input-row">
+          <input type="number" id="scoreInput" placeholder="例如 580" min="0" max="750">
+          <span class="input-suffix">分</span>
+          <button class="btn btn-primary btn-sm" id="scoreQueryBtn">查询</button>
+        </div>
+        <div class="slider-row">
+          <input type="range" id="scoreSlider" min="220" max="700" value="580">
+          <span class="slider-value" id="scoreSliderVal">580</span>
+        </div>
+        <div id="scoreResult" class="result-panel"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>③ 位次 → 分数</h3>
+          <span class="card-sub">输入位次，反向查分数</span>
+        </div>
+        <div class="input-row">
+          <input type="number" id="rankInput" placeholder="例如 10000" min="1">
+          <span class="input-suffix">名</span>
+          <button class="btn btn-primary btn-sm" id="rankQueryBtn">查询</button>
+        </div>
+        <div id="rankResult" class="result-panel"></div>
+      </div>
+
+      <div class="card card-wide">
+        <div class="card-head">
+          <h3>近邻分数分布</h3>
+          <span class="card-sub" id="queryChartSub">分数 ±10 范围</span>
+        </div>
+        <div class="chart-canvas-wrap chart-canvas-wrap-tall"><canvas id="queryChart"></canvas></div>
+      </div>
+
+      <div class="card card-wide">
+        <div class="card-head">
+          <h3>分数-位次 全曲线</h3>
+          <span class="card-sub">选择年份的完整数据</span>
+        </div>
+        <div class="chart-canvas-wrap chart-canvas-wrap-tall"><canvas id="queryCurveChart"></canvas></div>
+      </div>
+    </div>
+  </template>
+
+  <!-- 多年对比页 -->
+  <template id="tpl-compare">
+    <section class="page-head">
+      <h1 class="page-title">多年对比</h1>
+      <p class="page-sub">同一分数或同一名次在 2022–2025 各年的差异，定位"位次波动"</p>
+    </section>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>① 选择对比模式</h3>
+      </div>
+      <div class="mode-tabs" id="compareModeTabs">
+        <button class="mode-tab active" data-mode="score">按分数切片</button>
+        <button class="mode-tab" data-mode="rank">按位次切片</button>
+      </div>
+
+      <div class="card-inner" id="compareSliceBox">
+        <div class="year-pills" id="compareYearPills"></div>
+        <div class="input-row">
+          <label class="input-label" id="compareSliceLabel">分数</label>
+          <input type="number" id="compareSliceInput" placeholder="例如 600" min="0">
+          <span class="input-suffix" id="compareSliceSuffix">分</span>
+          <button class="btn btn-primary btn-sm" id="compareRunBtn">对比</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3 id="compareCountTitle">同分人数对比</h3>
+          <span class="chart-card-sub" id="compareCountSub">—</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="compareCountChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3 id="compareCumTitle">累计位次对比</h3>
+          <span class="chart-card-sub" id="compareCumSub">—</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="compareCumChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>对比结果</h3>
+        <span class="card-sub">各年数据明细</span>
+      </div>
+      <div class="lines-table-wrap">
+        <table class="data-table" id="compareResultTable">
+          <thead>
+            <tr>
+              <th>年份</th>
+              <th>同分人数</th>
+              <th>累计位次</th>
+              <th>位次差 (vs 基准)</th>
+            </tr>
+          </thead>
+          <tbody id="compareResultBody"></tbody>
+        </table>
+      </div>
+      <p class="hint-text" id="compareHint"></p>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h3>四年完整分布叠加</h3>
+        <span class="chart-card-sub">同分人数对比（按分数）</span>
+      </div>
+      <div class="chart-canvas-wrap chart-canvas-wrap-tall"><canvas id="compareOverlayChart"></canvas></div>
+    </div>
+  </template>
+
+  <!-- 数据表格页 -->
+  <template id="tpl-table">
+    <section class="page-head">
+      <h1 class="page-title">详细数据</h1>
+      <p class="page-sub">按分数降序展示，可搜索、排序、导出 CSV</p>
+    </section>
+
+    <div class="card">
+      <div class="card-head card-head-row">
+        <div>
+          <h3>一分一段表</h3>
+          <span class="card-sub" id="tableMeta">—</span>
+        </div>
+        <div class="card-actions">
+          <input type="search" id="tableSearch" class="search-input" placeholder="搜索分数 (如 580)">
+          <button class="btn btn-ghost btn-sm" id="tableExportBtn">导出 CSV</button>
+        </div>
+      </div>
+      <div class="year-pills" id="tableYearPills"></div>
+      <div class="table-wrap">
+        <table class="data-table compact-table" id="dataTable">
+          <thead>
+            <tr>
+              <th data-sort="score" data-dir="desc" class="sortable">分数 <span class="sort-ind"></span></th>
+              <th data-sort="count" data-dir="asc" class="sortable">同分人数 <span class="sort-ind"></span></th>
+              <th data-sort="cumulative" data-dir="asc" class="sortable">累计位次 <span class="sort-ind"></span></th>
+              <th>段位标签</th>
+            </tr>
+          </thead>
+          <tbody id="dataTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </template>
+
+  <!-- 关于页 -->
+  <template id="tpl-about">
+    <section class="page-head">
+      <h1 class="page-title">关于数据</h1>
+      <p class="page-sub">数据来源、采集时间、计算逻辑与免责声明</p>
+    </section>
+
+    <div class="about-grid">
+      <div class="card">
+        <h3>📊 数据来源</h3>
+        <ul class="about-list" id="aboutSourceList"></ul>
+      </div>
+
+      <div class="card">
+        <h3>🧮 计算说明</h3>
+        <ul class="about-list">
+          <li>累计位次 = 该分数及以上所有考生人数之和</li>
+          <li>数据已包含高考加分（同福建省教育考试院发布口径）</li>
+          <li>分数⇄位次换算采用二分查找，毫秒级响应</li>
+          <li>若输入分数不在表中，自动取最近分数估算</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>🎓 院校层级参考</h3>
+        <p class="hint-text" style="margin-bottom: 12px;">以下区间为参考性划分，仅供大致了解位次对应层级；实际录取受计划数、专业组、选科要求等影响，<strong>不构成志愿建议</strong>。</p>
+        <ul class="tier-list" id="tierList"></ul>
+      </div>
+
+      <div class="card">
+        <h3>⚠️ 免责声明</h3>
+        <ul class="about-list">
+          <li>本站数据来源于公开渠道整理，<strong>最终以福建省教育考试院官方公告为准</strong></li>
+          <li>本站提供的内容仅供参考，<strong>不构成任何高考志愿填报建议</strong></li>
+          <li>使用本站信息所产生的任何后果，由用户自行承担</li>
+          <li>如发现数据有误，欢迎反馈修正</li>
+        </ul>
+      </div>
+    </div>
+  </template>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- 应用脚本 -->
+  <script src="scripts/data-loader.js"></script>
+  <script src="scripts/schools.js"></script>
+  <script src="scripts/charts.js"></script>
+  <script src="scripts/views.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

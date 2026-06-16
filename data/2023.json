@@ -1,0 +1,2477 @@
+{
+  "year": 2023,
+  "track": "物理类",
+  "province": "福建",
+  "rows": [
+    {
+      "score": 693,
+      "count": 42,
+      "cumulative": 42
+    },
+    {
+      "score": 692,
+      "count": 10,
+      "cumulative": 52
+    },
+    {
+      "score": 691,
+      "count": 14,
+      "cumulative": 66
+    },
+    {
+      "score": 690,
+      "count": 13,
+      "cumulative": 79
+    },
+    {
+      "score": 689,
+      "count": 9,
+      "cumulative": 88
+    },
+    {
+      "score": 688,
+      "count": 11,
+      "cumulative": 99
+    },
+    {
+      "score": 687,
+      "count": 20,
+      "cumulative": 119
+    },
+    {
+      "score": 686,
+      "count": 23,
+      "cumulative": 142
+    },
+    {
+      "score": 685,
+      "count": 13,
+      "cumulative": 155
+    },
+    {
+      "score": 684,
+      "count": 11,
+      "cumulative": 166
+    },
+    {
+      "score": 683,
+      "count": 21,
+      "cumulative": 187
+    },
+    {
+      "score": 682,
+      "count": 25,
+      "cumulative": 212
+    },
+    {
+      "score": 681,
+      "count": 23,
+      "cumulative": 235
+    },
+    {
+      "score": 680,
+      "count": 24,
+      "cumulative": 259
+    },
+    {
+      "score": 679,
+      "count": 17,
+      "cumulative": 276
+    },
+    {
+      "score": 678,
+      "count": 27,
+      "cumulative": 303
+    },
+    {
+      "score": 677,
+      "count": 36,
+      "cumulative": 339
+    },
+    {
+      "score": 676,
+      "count": 27,
+      "cumulative": 366
+    },
+    {
+      "score": 675,
+      "count": 29,
+      "cumulative": 395
+    },
+    {
+      "score": 674,
+      "count": 34,
+      "cumulative": 429
+    },
+    {
+      "score": 673,
+      "count": 32,
+      "cumulative": 461
+    },
+    {
+      "score": 672,
+      "count": 44,
+      "cumulative": 505
+    },
+    {
+      "score": 671,
+      "count": 40,
+      "cumulative": 545
+    },
+    {
+      "score": 670,
+      "count": 36,
+      "cumulative": 581
+    },
+    {
+      "score": 669,
+      "count": 37,
+      "cumulative": 618
+    },
+    {
+      "score": 668,
+      "count": 54,
+      "cumulative": 672
+    },
+    {
+      "score": 667,
+      "count": 54,
+      "cumulative": 726
+    },
+    {
+      "score": 666,
+      "count": 51,
+      "cumulative": 777
+    },
+    {
+      "score": 665,
+      "count": 64,
+      "cumulative": 841
+    },
+    {
+      "score": 664,
+      "count": 62,
+      "cumulative": 903
+    },
+    {
+      "score": 663,
+      "count": 71,
+      "cumulative": 974
+    },
+    {
+      "score": 662,
+      "count": 73,
+      "cumulative": 1047
+    },
+    {
+      "score": 661,
+      "count": 62,
+      "cumulative": 1109
+    },
+    {
+      "score": 660,
+      "count": 62,
+      "cumulative": 1171
+    },
+    {
+      "score": 659,
+      "count": 88,
+      "cumulative": 1259
+    },
+    {
+      "score": 658,
+      "count": 73,
+      "cumulative": 1332
+    },
+    {
+      "score": 657,
+      "count": 91,
+      "cumulative": 1423
+    },
+    {
+      "score": 656,
+      "count": 92,
+      "cumulative": 1515
+    },
+    {
+      "score": 655,
+      "count": 82,
+      "cumulative": 1597
+    },
+    {
+      "score": 654,
+      "count": 96,
+      "cumulative": 1693
+    },
+    {
+      "score": 653,
+      "count": 109,
+      "cumulative": 1802
+    },
+    {
+      "score": 652,
+      "count": 97,
+      "cumulative": 1899
+    },
+    {
+      "score": 651,
+      "count": 92,
+      "cumulative": 1991
+    },
+    {
+      "score": 650,
+      "count": 94,
+      "cumulative": 2085
+    },
+    {
+      "score": 649,
+      "count": 105,
+      "cumulative": 2190
+    },
+    {
+      "score": 648,
+      "count": 113,
+      "cumulative": 2303
+    },
+    {
+      "score": 647,
+      "count": 109,
+      "cumulative": 2412
+    },
+    {
+      "score": 646,
+      "count": 120,
+      "cumulative": 2532
+    },
+    {
+      "score": 645,
+      "count": 103,
+      "cumulative": 2635
+    },
+    {
+      "score": 644,
+      "count": 130,
+      "cumulative": 2765
+    },
+    {
+      "score": 643,
+      "count": 110,
+      "cumulative": 2875
+    },
+    {
+      "score": 642,
+      "count": 135,
+      "cumulative": 3010
+    },
+    {
+      "score": 641,
+      "count": 131,
+      "cumulative": 3141
+    },
+    {
+      "score": 640,
+      "count": 126,
+      "cumulative": 3267
+    },
+    {
+      "score": 639,
+      "count": 122,
+      "cumulative": 3389
+    },
+    {
+      "score": 638,
+      "count": 157,
+      "cumulative": 3546
+    },
+    {
+      "score": 637,
+      "count": 164,
+      "cumulative": 3710
+    },
+    {
+      "score": 636,
+      "count": 171,
+      "cumulative": 3881
+    },
+    {
+      "score": 635,
+      "count": 141,
+      "cumulative": 4022
+    },
+    {
+      "score": 634,
+      "count": 151,
+      "cumulative": 4173
+    },
+    {
+      "score": 633,
+      "count": 162,
+      "cumulative": 4335
+    },
+    {
+      "score": 632,
+      "count": 156,
+      "cumulative": 4491
+    },
+    {
+      "score": 631,
+      "count": 171,
+      "cumulative": 4662
+    },
+    {
+      "score": 630,
+      "count": 162,
+      "cumulative": 4824
+    },
+    {
+      "score": 629,
+      "count": 181,
+      "cumulative": 5005
+    },
+    {
+      "score": 628,
+      "count": 186,
+      "cumulative": 5191
+    },
+    {
+      "score": 627,
+      "count": 183,
+      "cumulative": 5374
+    },
+    {
+      "score": 626,
+      "count": 187,
+      "cumulative": 5561
+    },
+    {
+      "score": 625,
+      "count": 199,
+      "cumulative": 5760
+    },
+    {
+      "score": 624,
+      "count": 203,
+      "cumulative": 5963
+    },
+    {
+      "score": 623,
+      "count": 174,
+      "cumulative": 6137
+    },
+    {
+      "score": 622,
+      "count": 181,
+      "cumulative": 6318
+    },
+    {
+      "score": 621,
+      "count": 216,
+      "cumulative": 6534
+    },
+    {
+      "score": 620,
+      "count": 223,
+      "cumulative": 6757
+    },
+    {
+      "score": 619,
+      "count": 216,
+      "cumulative": 6973
+    },
+    {
+      "score": 618,
+      "count": 229,
+      "cumulative": 7202
+    },
+    {
+      "score": 617,
+      "count": 204,
+      "cumulative": 7406
+    },
+    {
+      "score": 616,
+      "count": 202,
+      "cumulative": 7608
+    },
+    {
+      "score": 615,
+      "count": 220,
+      "cumulative": 7828
+    },
+    {
+      "score": 614,
+      "count": 197,
+      "cumulative": 8025
+    },
+    {
+      "score": 613,
+      "count": 219,
+      "cumulative": 8244
+    },
+    {
+      "score": 612,
+      "count": 233,
+      "cumulative": 8477
+    },
+    {
+      "score": 611,
+      "count": 214,
+      "cumulative": 8691
+    },
+    {
+      "score": 610,
+      "count": 242,
+      "cumulative": 8933
+    },
+    {
+      "score": 609,
+      "count": 228,
+      "cumulative": 9161
+    },
+    {
+      "score": 608,
+      "count": 251,
+      "cumulative": 9412
+    },
+    {
+      "score": 607,
+      "count": 235,
+      "cumulative": 9647
+    },
+    {
+      "score": 606,
+      "count": 224,
+      "cumulative": 9871
+    },
+    {
+      "score": 605,
+      "count": 252,
+      "cumulative": 10123
+    },
+    {
+      "score": 604,
+      "count": 259,
+      "cumulative": 10382
+    },
+    {
+      "score": 603,
+      "count": 255,
+      "cumulative": 10637
+    },
+    {
+      "score": 602,
+      "count": 258,
+      "cumulative": 10895
+    },
+    {
+      "score": 601,
+      "count": 266,
+      "cumulative": 11161
+    },
+    {
+      "score": 600,
+      "count": 254,
+      "cumulative": 11415
+    },
+    {
+      "score": 599,
+      "count": 288,
+      "cumulative": 11703
+    },
+    {
+      "score": 598,
+      "count": 249,
+      "cumulative": 11952
+    },
+    {
+      "score": 597,
+      "count": 298,
+      "cumulative": 12250
+    },
+    {
+      "score": 596,
+      "count": 294,
+      "cumulative": 12544
+    },
+    {
+      "score": 595,
+      "count": 259,
+      "cumulative": 12803
+    },
+    {
+      "score": 594,
+      "count": 294,
+      "cumulative": 13097
+    },
+    {
+      "score": 593,
+      "count": 283,
+      "cumulative": 13380
+    },
+    {
+      "score": 592,
+      "count": 291,
+      "cumulative": 13671
+    },
+    {
+      "score": 591,
+      "count": 294,
+      "cumulative": 13965
+    },
+    {
+      "score": 590,
+      "count": 345,
+      "cumulative": 14310
+    },
+    {
+      "score": 589,
+      "count": 292,
+      "cumulative": 14602
+    },
+    {
+      "score": 588,
+      "count": 330,
+      "cumulative": 14932
+    },
+    {
+      "score": 587,
+      "count": 331,
+      "cumulative": 15263
+    },
+    {
+      "score": 586,
+      "count": 325,
+      "cumulative": 15588
+    },
+    {
+      "score": 585,
+      "count": 341,
+      "cumulative": 15929
+    },
+    {
+      "score": 584,
+      "count": 312,
+      "cumulative": 16241
+    },
+    {
+      "score": 583,
+      "count": 337,
+      "cumulative": 16578
+    },
+    {
+      "score": 582,
+      "count": 318,
+      "cumulative": 16896
+    },
+    {
+      "score": 581,
+      "count": 331,
+      "cumulative": 17227
+    },
+    {
+      "score": 580,
+      "count": 340,
+      "cumulative": 17567
+    },
+    {
+      "score": 579,
+      "count": 347,
+      "cumulative": 17914
+    },
+    {
+      "score": 578,
+      "count": 338,
+      "cumulative": 18252
+    },
+    {
+      "score": 577,
+      "count": 350,
+      "cumulative": 18602
+    },
+    {
+      "score": 576,
+      "count": 355,
+      "cumulative": 18957
+    },
+    {
+      "score": 575,
+      "count": 378,
+      "cumulative": 19335
+    },
+    {
+      "score": 574,
+      "count": 366,
+      "cumulative": 19701
+    },
+    {
+      "score": 573,
+      "count": 390,
+      "cumulative": 20091
+    },
+    {
+      "score": 572,
+      "count": 361,
+      "cumulative": 20452
+    },
+    {
+      "score": 571,
+      "count": 370,
+      "cumulative": 20822
+    },
+    {
+      "score": 570,
+      "count": 343,
+      "cumulative": 21165
+    },
+    {
+      "score": 569,
+      "count": 397,
+      "cumulative": 21562
+    },
+    {
+      "score": 568,
+      "count": 419,
+      "cumulative": 21981
+    },
+    {
+      "score": 567,
+      "count": 370,
+      "cumulative": 22351
+    },
+    {
+      "score": 566,
+      "count": 352,
+      "cumulative": 22703
+    },
+    {
+      "score": 565,
+      "count": 378,
+      "cumulative": 23081
+    },
+    {
+      "score": 564,
+      "count": 363,
+      "cumulative": 23444
+    },
+    {
+      "score": 563,
+      "count": 391,
+      "cumulative": 23835
+    },
+    {
+      "score": 562,
+      "count": 429,
+      "cumulative": 24264
+    },
+    {
+      "score": 561,
+      "count": 425,
+      "cumulative": 24689
+    },
+    {
+      "score": 560,
+      "count": 401,
+      "cumulative": 25090
+    },
+    {
+      "score": 559,
+      "count": 415,
+      "cumulative": 25505
+    },
+    {
+      "score": 558,
+      "count": 393,
+      "cumulative": 25898
+    },
+    {
+      "score": 557,
+      "count": 440,
+      "cumulative": 26338
+    },
+    {
+      "score": 556,
+      "count": 395,
+      "cumulative": 26733
+    },
+    {
+      "score": 555,
+      "count": 429,
+      "cumulative": 27162
+    },
+    {
+      "score": 554,
+      "count": 408,
+      "cumulative": 27570
+    },
+    {
+      "score": 553,
+      "count": 402,
+      "cumulative": 27972
+    },
+    {
+      "score": 552,
+      "count": 423,
+      "cumulative": 28395
+    },
+    {
+      "score": 551,
+      "count": 455,
+      "cumulative": 28850
+    },
+    {
+      "score": 550,
+      "count": 451,
+      "cumulative": 29301
+    },
+    {
+      "score": 549,
+      "count": 494,
+      "cumulative": 29795
+    },
+    {
+      "score": 548,
+      "count": 444,
+      "cumulative": 30239
+    },
+    {
+      "score": 547,
+      "count": 455,
+      "cumulative": 30694
+    },
+    {
+      "score": 546,
+      "count": 454,
+      "cumulative": 31148
+    },
+    {
+      "score": 545,
+      "count": 435,
+      "cumulative": 31583
+    },
+    {
+      "score": 544,
+      "count": 440,
+      "cumulative": 32023
+    },
+    {
+      "score": 543,
+      "count": 457,
+      "cumulative": 32480
+    },
+    {
+      "score": 542,
+      "count": 469,
+      "cumulative": 32949
+    },
+    {
+      "score": 541,
+      "count": 507,
+      "cumulative": 33456
+    },
+    {
+      "score": 540,
+      "count": 474,
+      "cumulative": 33930
+    },
+    {
+      "score": 539,
+      "count": 513,
+      "cumulative": 34443
+    },
+    {
+      "score": 538,
+      "count": 478,
+      "cumulative": 34921
+    },
+    {
+      "score": 537,
+      "count": 474,
+      "cumulative": 35395
+    },
+    {
+      "score": 536,
+      "count": 484,
+      "cumulative": 35879
+    },
+    {
+      "score": 535,
+      "count": 481,
+      "cumulative": 36360
+    },
+    {
+      "score": 534,
+      "count": 516,
+      "cumulative": 36876
+    },
+    {
+      "score": 533,
+      "count": 447,
+      "cumulative": 37323
+    },
+    {
+      "score": 532,
+      "count": 517,
+      "cumulative": 37840
+    },
+    {
+      "score": 531,
+      "count": 513,
+      "cumulative": 38353
+    },
+    {
+      "score": 530,
+      "count": 517,
+      "cumulative": 38870
+    },
+    {
+      "score": 529,
+      "count": 512,
+      "cumulative": 39382
+    },
+    {
+      "score": 528,
+      "count": 492,
+      "cumulative": 39874
+    },
+    {
+      "score": 527,
+      "count": 525,
+      "cumulative": 40399
+    },
+    {
+      "score": 526,
+      "count": 531,
+      "cumulative": 40930
+    },
+    {
+      "score": 525,
+      "count": 519,
+      "cumulative": 41449
+    },
+    {
+      "score": 524,
+      "count": 540,
+      "cumulative": 41989
+    },
+    {
+      "score": 523,
+      "count": 509,
+      "cumulative": 42498
+    },
+    {
+      "score": 522,
+      "count": 538,
+      "cumulative": 43036
+    },
+    {
+      "score": 521,
+      "count": 564,
+      "cumulative": 43600
+    },
+    {
+      "score": 520,
+      "count": 516,
+      "cumulative": 44116
+    },
+    {
+      "score": 519,
+      "count": 471,
+      "cumulative": 44587
+    },
+    {
+      "score": 518,
+      "count": 595,
+      "cumulative": 45182
+    },
+    {
+      "score": 517,
+      "count": 560,
+      "cumulative": 45742
+    },
+    {
+      "score": 516,
+      "count": 529,
+      "cumulative": 46271
+    },
+    {
+      "score": 515,
+      "count": 516,
+      "cumulative": 46787
+    },
+    {
+      "score": 514,
+      "count": 533,
+      "cumulative": 47320
+    },
+    {
+      "score": 513,
+      "count": 537,
+      "cumulative": 47857
+    },
+    {
+      "score": 512,
+      "count": 598,
+      "cumulative": 48455
+    },
+    {
+      "score": 511,
+      "count": 560,
+      "cumulative": 49015
+    },
+    {
+      "score": 510,
+      "count": 524,
+      "cumulative": 49539
+    },
+    {
+      "score": 509,
+      "count": 604,
+      "cumulative": 50143
+    },
+    {
+      "score": 508,
+      "count": 613,
+      "cumulative": 50756
+    },
+    {
+      "score": 507,
+      "count": 551,
+      "cumulative": 51307
+    },
+    {
+      "score": 506,
+      "count": 616,
+      "cumulative": 51923
+    },
+    {
+      "score": 505,
+      "count": 590,
+      "cumulative": 52513
+    },
+    {
+      "score": 504,
+      "count": 570,
+      "cumulative": 53083
+    },
+    {
+      "score": 503,
+      "count": 585,
+      "cumulative": 53668
+    },
+    {
+      "score": 502,
+      "count": 579,
+      "cumulative": 54247
+    },
+    {
+      "score": 501,
+      "count": 570,
+      "cumulative": 54817
+    },
+    {
+      "score": 500,
+      "count": 578,
+      "cumulative": 55395
+    },
+    {
+      "score": 499,
+      "count": 608,
+      "cumulative": 56003
+    },
+    {
+      "score": 498,
+      "count": 613,
+      "cumulative": 56616
+    },
+    {
+      "score": 497,
+      "count": 607,
+      "cumulative": 57223
+    },
+    {
+      "score": 496,
+      "count": 567,
+      "cumulative": 57790
+    },
+    {
+      "score": 495,
+      "count": 618,
+      "cumulative": 58408
+    },
+    {
+      "score": 494,
+      "count": 619,
+      "cumulative": 59027
+    },
+    {
+      "score": 493,
+      "count": 615,
+      "cumulative": 59642
+    },
+    {
+      "score": 492,
+      "count": 639,
+      "cumulative": 60281
+    },
+    {
+      "score": 491,
+      "count": 628,
+      "cumulative": 60909
+    },
+    {
+      "score": 490,
+      "count": 622,
+      "cumulative": 61531
+    },
+    {
+      "score": 489,
+      "count": 631,
+      "cumulative": 62162
+    },
+    {
+      "score": 488,
+      "count": 625,
+      "cumulative": 62787
+    },
+    {
+      "score": 487,
+      "count": 612,
+      "cumulative": 63399
+    },
+    {
+      "score": 486,
+      "count": 627,
+      "cumulative": 64026
+    },
+    {
+      "score": 485,
+      "count": 593,
+      "cumulative": 64619
+    },
+    {
+      "score": 484,
+      "count": 615,
+      "cumulative": 65234
+    },
+    {
+      "score": 483,
+      "count": 632,
+      "cumulative": 65866
+    },
+    {
+      "score": 482,
+      "count": 624,
+      "cumulative": 66490
+    },
+    {
+      "score": 481,
+      "count": 597,
+      "cumulative": 67087
+    },
+    {
+      "score": 480,
+      "count": 620,
+      "cumulative": 67707
+    },
+    {
+      "score": 479,
+      "count": 626,
+      "cumulative": 68333
+    },
+    {
+      "score": 478,
+      "count": 580,
+      "cumulative": 68913
+    },
+    {
+      "score": 477,
+      "count": 613,
+      "cumulative": 69526
+    },
+    {
+      "score": 476,
+      "count": 619,
+      "cumulative": 70145
+    },
+    {
+      "score": 475,
+      "count": 591,
+      "cumulative": 70736
+    },
+    {
+      "score": 474,
+      "count": 617,
+      "cumulative": 71353
+    },
+    {
+      "score": 473,
+      "count": 597,
+      "cumulative": 71950
+    },
+    {
+      "score": 472,
+      "count": 562,
+      "cumulative": 72512
+    },
+    {
+      "score": 471,
+      "count": 593,
+      "cumulative": 73105
+    },
+    {
+      "score": 470,
+      "count": 574,
+      "cumulative": 73679
+    },
+    {
+      "score": 469,
+      "count": 580,
+      "cumulative": 74259
+    },
+    {
+      "score": 468,
+      "count": 545,
+      "cumulative": 74804
+    },
+    {
+      "score": 467,
+      "count": 567,
+      "cumulative": 75371
+    },
+    {
+      "score": 466,
+      "count": 567,
+      "cumulative": 75938
+    },
+    {
+      "score": 465,
+      "count": 564,
+      "cumulative": 76502
+    },
+    {
+      "score": 464,
+      "count": 575,
+      "cumulative": 77077
+    },
+    {
+      "score": 463,
+      "count": 555,
+      "cumulative": 77632
+    },
+    {
+      "score": 462,
+      "count": 564,
+      "cumulative": 78196
+    },
+    {
+      "score": 461,
+      "count": 555,
+      "cumulative": 78751
+    },
+    {
+      "score": 460,
+      "count": 562,
+      "cumulative": 79313
+    },
+    {
+      "score": 459,
+      "count": 538,
+      "cumulative": 79851
+    },
+    {
+      "score": 458,
+      "count": 521,
+      "cumulative": 80372
+    },
+    {
+      "score": 457,
+      "count": 537,
+      "cumulative": 80909
+    },
+    {
+      "score": 456,
+      "count": 526,
+      "cumulative": 81435
+    },
+    {
+      "score": 455,
+      "count": 547,
+      "cumulative": 81982
+    },
+    {
+      "score": 454,
+      "count": 519,
+      "cumulative": 82501
+    },
+    {
+      "score": 453,
+      "count": 555,
+      "cumulative": 83056
+    },
+    {
+      "score": 452,
+      "count": 528,
+      "cumulative": 83584
+    },
+    {
+      "score": 451,
+      "count": 549,
+      "cumulative": 84133
+    },
+    {
+      "score": 450,
+      "count": 533,
+      "cumulative": 84666
+    },
+    {
+      "score": 449,
+      "count": 530,
+      "cumulative": 85196
+    },
+    {
+      "score": 448,
+      "count": 528,
+      "cumulative": 85724
+    },
+    {
+      "score": 447,
+      "count": 521,
+      "cumulative": 86245
+    },
+    {
+      "score": 446,
+      "count": 502,
+      "cumulative": 86747
+    },
+    {
+      "score": 445,
+      "count": 528,
+      "cumulative": 87275
+    },
+    {
+      "score": 444,
+      "count": 540,
+      "cumulative": 87815
+    },
+    {
+      "score": 443,
+      "count": 522,
+      "cumulative": 88337
+    },
+    {
+      "score": 442,
+      "count": 514,
+      "cumulative": 88851
+    },
+    {
+      "score": 441,
+      "count": 532,
+      "cumulative": 89383
+    },
+    {
+      "score": 440,
+      "count": 521,
+      "cumulative": 89904
+    },
+    {
+      "score": 439,
+      "count": 504,
+      "cumulative": 90408
+    },
+    {
+      "score": 438,
+      "count": 522,
+      "cumulative": 90930
+    },
+    {
+      "score": 437,
+      "count": 519,
+      "cumulative": 91449
+    },
+    {
+      "score": 436,
+      "count": 488,
+      "cumulative": 91937
+    },
+    {
+      "score": 435,
+      "count": 511,
+      "cumulative": 92448
+    },
+    {
+      "score": 434,
+      "count": 504,
+      "cumulative": 92952
+    },
+    {
+      "score": 433,
+      "count": 510,
+      "cumulative": 93462
+    },
+    {
+      "score": 432,
+      "count": 488,
+      "cumulative": 93950
+    },
+    {
+      "score": 431,
+      "count": 495,
+      "cumulative": 94445
+    },
+    {
+      "score": 430,
+      "count": 504,
+      "cumulative": 94949
+    },
+    {
+      "score": 429,
+      "count": 510,
+      "cumulative": 95459
+    },
+    {
+      "score": 428,
+      "count": 487,
+      "cumulative": 95946
+    },
+    {
+      "score": 427,
+      "count": 469,
+      "cumulative": 96415
+    },
+    {
+      "score": 426,
+      "count": 484,
+      "cumulative": 96899
+    },
+    {
+      "score": 425,
+      "count": 503,
+      "cumulative": 97402
+    },
+    {
+      "score": 424,
+      "count": 471,
+      "cumulative": 97873
+    },
+    {
+      "score": 423,
+      "count": 471,
+      "cumulative": 98344
+    },
+    {
+      "score": 422,
+      "count": 469,
+      "cumulative": 98813
+    },
+    {
+      "score": 421,
+      "count": 470,
+      "cumulative": 99283
+    },
+    {
+      "score": 420,
+      "count": 466,
+      "cumulative": 99749
+    },
+    {
+      "score": 419,
+      "count": 451,
+      "cumulative": 100200
+    },
+    {
+      "score": 418,
+      "count": 462,
+      "cumulative": 100662
+    },
+    {
+      "score": 417,
+      "count": 478,
+      "cumulative": 101140
+    },
+    {
+      "score": 416,
+      "count": 452,
+      "cumulative": 101592
+    },
+    {
+      "score": 415,
+      "count": 472,
+      "cumulative": 102064
+    },
+    {
+      "score": 414,
+      "count": 459,
+      "cumulative": 102523
+    },
+    {
+      "score": 413,
+      "count": 450,
+      "cumulative": 102973
+    },
+    {
+      "score": 412,
+      "count": 460,
+      "cumulative": 103433
+    },
+    {
+      "score": 411,
+      "count": 449,
+      "cumulative": 103882
+    },
+    {
+      "score": 410,
+      "count": 446,
+      "cumulative": 104328
+    },
+    {
+      "score": 409,
+      "count": 444,
+      "cumulative": 104772
+    },
+    {
+      "score": 408,
+      "count": 432,
+      "cumulative": 105204
+    },
+    {
+      "score": 407,
+      "count": 450,
+      "cumulative": 105654
+    },
+    {
+      "score": 406,
+      "count": 432,
+      "cumulative": 106086
+    },
+    {
+      "score": 405,
+      "count": 415,
+      "cumulative": 106501
+    },
+    {
+      "score": 404,
+      "count": 421,
+      "cumulative": 106922
+    },
+    {
+      "score": 403,
+      "count": 420,
+      "cumulative": 107342
+    },
+    {
+      "score": 402,
+      "count": 411,
+      "cumulative": 107753
+    },
+    {
+      "score": 401,
+      "count": 421,
+      "cumulative": 108174
+    },
+    {
+      "score": 400,
+      "count": 402,
+      "cumulative": 108576
+    },
+    {
+      "score": 399,
+      "count": 412,
+      "cumulative": 108988
+    },
+    {
+      "score": 398,
+      "count": 397,
+      "cumulative": 109385
+    },
+    {
+      "score": 397,
+      "count": 405,
+      "cumulative": 109790
+    },
+    {
+      "score": 396,
+      "count": 405,
+      "cumulative": 110195
+    },
+    {
+      "score": 395,
+      "count": 397,
+      "cumulative": 110592
+    },
+    {
+      "score": 394,
+      "count": 391,
+      "cumulative": 110983
+    },
+    {
+      "score": 393,
+      "count": 380,
+      "cumulative": 111363
+    },
+    {
+      "score": 392,
+      "count": 360,
+      "cumulative": 111723
+    },
+    {
+      "score": 391,
+      "count": 387,
+      "cumulative": 112110
+    },
+    {
+      "score": 390,
+      "count": 360,
+      "cumulative": 112470
+    },
+    {
+      "score": 389,
+      "count": 374,
+      "cumulative": 112844
+    },
+    {
+      "score": 388,
+      "count": 372,
+      "cumulative": 113216
+    },
+    {
+      "score": 387,
+      "count": 370,
+      "cumulative": 113586
+    },
+    {
+      "score": 386,
+      "count": 358,
+      "cumulative": 113944
+    },
+    {
+      "score": 385,
+      "count": 350,
+      "cumulative": 114294
+    },
+    {
+      "score": 384,
+      "count": 358,
+      "cumulative": 114652
+    },
+    {
+      "score": 383,
+      "count": 357,
+      "cumulative": 115009
+    },
+    {
+      "score": 382,
+      "count": 349,
+      "cumulative": 115358
+    },
+    {
+      "score": 381,
+      "count": 359,
+      "cumulative": 115717
+    },
+    {
+      "score": 380,
+      "count": 333,
+      "cumulative": 116050
+    },
+    {
+      "score": 379,
+      "count": 339,
+      "cumulative": 116389
+    },
+    {
+      "score": 378,
+      "count": 344,
+      "cumulative": 116733
+    },
+    {
+      "score": 377,
+      "count": 320,
+      "cumulative": 117053
+    },
+    {
+      "score": 376,
+      "count": 333,
+      "cumulative": 117386
+    },
+    {
+      "score": 375,
+      "count": 343,
+      "cumulative": 117729
+    },
+    {
+      "score": 374,
+      "count": 305,
+      "cumulative": 118034
+    },
+    {
+      "score": 373,
+      "count": 311,
+      "cumulative": 118345
+    },
+    {
+      "score": 372,
+      "count": 312,
+      "cumulative": 118657
+    },
+    {
+      "score": 371,
+      "count": 309,
+      "cumulative": 118966
+    },
+    {
+      "score": 370,
+      "count": 308,
+      "cumulative": 119274
+    },
+    {
+      "score": 369,
+      "count": 309,
+      "cumulative": 119583
+    },
+    {
+      "score": 368,
+      "count": 296,
+      "cumulative": 119879
+    },
+    {
+      "score": 367,
+      "count": 290,
+      "cumulative": 120169
+    },
+    {
+      "score": 366,
+      "count": 291,
+      "cumulative": 120460
+    },
+    {
+      "score": 365,
+      "count": 295,
+      "cumulative": 120755
+    },
+    {
+      "score": 364,
+      "count": 271,
+      "cumulative": 121026
+    },
+    {
+      "score": 363,
+      "count": 269,
+      "cumulative": 121295
+    },
+    {
+      "score": 362,
+      "count": 270,
+      "cumulative": 121565
+    },
+    {
+      "score": 361,
+      "count": 270,
+      "cumulative": 121835
+    },
+    {
+      "score": 360,
+      "count": 270,
+      "cumulative": 122105
+    },
+    {
+      "score": 359,
+      "count": 268,
+      "cumulative": 122373
+    },
+    {
+      "score": 358,
+      "count": 257,
+      "cumulative": 122630
+    },
+    {
+      "score": 357,
+      "count": 257,
+      "cumulative": 122887
+    },
+    {
+      "score": 356,
+      "count": 252,
+      "cumulative": 123139
+    },
+    {
+      "score": 355,
+      "count": 254,
+      "cumulative": 123393
+    },
+    {
+      "score": 354,
+      "count": 252,
+      "cumulative": 123645
+    },
+    {
+      "score": 353,
+      "count": 244,
+      "cumulative": 123889
+    },
+    {
+      "score": 352,
+      "count": 246,
+      "cumulative": 124135
+    },
+    {
+      "score": 351,
+      "count": 234,
+      "cumulative": 124369
+    },
+    {
+      "score": 350,
+      "count": 248,
+      "cumulative": 124617
+    },
+    {
+      "score": 349,
+      "count": 233,
+      "cumulative": 124850
+    },
+    {
+      "score": 348,
+      "count": 240,
+      "cumulative": 125090
+    },
+    {
+      "score": 347,
+      "count": 232,
+      "cumulative": 125322
+    },
+    {
+      "score": 346,
+      "count": 224,
+      "cumulative": 125546
+    },
+    {
+      "score": 345,
+      "count": 217,
+      "cumulative": 125763
+    },
+    {
+      "score": 344,
+      "count": 220,
+      "cumulative": 125983
+    },
+    {
+      "score": 343,
+      "count": 209,
+      "cumulative": 126192
+    },
+    {
+      "score": 342,
+      "count": 219,
+      "cumulative": 126411
+    },
+    {
+      "score": 341,
+      "count": 215,
+      "cumulative": 126626
+    },
+    {
+      "score": 340,
+      "count": 211,
+      "cumulative": 126837
+    },
+    {
+      "score": 339,
+      "count": 205,
+      "cumulative": 127042
+    },
+    {
+      "score": 338,
+      "count": 207,
+      "cumulative": 127249
+    },
+    {
+      "score": 337,
+      "count": 195,
+      "cumulative": 127444
+    },
+    {
+      "score": 336,
+      "count": 199,
+      "cumulative": 127643
+    },
+    {
+      "score": 335,
+      "count": 196,
+      "cumulative": 127839
+    },
+    {
+      "score": 334,
+      "count": 192,
+      "cumulative": 128031
+    },
+    {
+      "score": 333,
+      "count": 193,
+      "cumulative": 128224
+    },
+    {
+      "score": 332,
+      "count": 192,
+      "cumulative": 128416
+    },
+    {
+      "score": 331,
+      "count": 187,
+      "cumulative": 128603
+    },
+    {
+      "score": 330,
+      "count": 184,
+      "cumulative": 128787
+    },
+    {
+      "score": 329,
+      "count": 179,
+      "cumulative": 128966
+    },
+    {
+      "score": 328,
+      "count": 180,
+      "cumulative": 129146
+    },
+    {
+      "score": 327,
+      "count": 175,
+      "cumulative": 129321
+    },
+    {
+      "score": 326,
+      "count": 174,
+      "cumulative": 129495
+    },
+    {
+      "score": 325,
+      "count": 167,
+      "cumulative": 129662
+    },
+    {
+      "score": 324,
+      "count": 168,
+      "cumulative": 129830
+    },
+    {
+      "score": 323,
+      "count": 162,
+      "cumulative": 129992
+    },
+    {
+      "score": 322,
+      "count": 165,
+      "cumulative": 130157
+    },
+    {
+      "score": 321,
+      "count": 158,
+      "cumulative": 130315
+    },
+    {
+      "score": 320,
+      "count": 158,
+      "cumulative": 130473
+    },
+    {
+      "score": 319,
+      "count": 155,
+      "cumulative": 130628
+    },
+    {
+      "score": 318,
+      "count": 152,
+      "cumulative": 130780
+    },
+    {
+      "score": 317,
+      "count": 154,
+      "cumulative": 130934
+    },
+    {
+      "score": 316,
+      "count": 148,
+      "cumulative": 131082
+    },
+    {
+      "score": 315,
+      "count": 148,
+      "cumulative": 131230
+    },
+    {
+      "score": 314,
+      "count": 143,
+      "cumulative": 131373
+    },
+    {
+      "score": 313,
+      "count": 142,
+      "cumulative": 131515
+    },
+    {
+      "score": 312,
+      "count": 144,
+      "cumulative": 131659
+    },
+    {
+      "score": 311,
+      "count": 137,
+      "cumulative": 131796
+    },
+    {
+      "score": 310,
+      "count": 138,
+      "cumulative": 131934
+    },
+    {
+      "score": 309,
+      "count": 137,
+      "cumulative": 132071
+    },
+    {
+      "score": 308,
+      "count": 132,
+      "cumulative": 132203
+    },
+    {
+      "score": 307,
+      "count": 130,
+      "cumulative": 132333
+    },
+    {
+      "score": 306,
+      "count": 127,
+      "cumulative": 132460
+    },
+    {
+      "score": 305,
+      "count": 128,
+      "cumulative": 132588
+    },
+    {
+      "score": 304,
+      "count": 124,
+      "cumulative": 132712
+    },
+    {
+      "score": 303,
+      "count": 121,
+      "cumulative": 132833
+    },
+    {
+      "score": 302,
+      "count": 121,
+      "cumulative": 132954
+    },
+    {
+      "score": 301,
+      "count": 117,
+      "cumulative": 133071
+    },
+    {
+      "score": 300,
+      "count": 119,
+      "cumulative": 133190
+    },
+    {
+      "score": 299,
+      "count": 113,
+      "cumulative": 133303
+    },
+    {
+      "score": 298,
+      "count": 112,
+      "cumulative": 133415
+    },
+    {
+      "score": 297,
+      "count": 109,
+      "cumulative": 133524
+    },
+    {
+      "score": 296,
+      "count": 108,
+      "cumulative": 133632
+    },
+    {
+      "score": 295,
+      "count": 107,
+      "cumulative": 133739
+    },
+    {
+      "score": 294,
+      "count": 104,
+      "cumulative": 133843
+    },
+    {
+      "score": 293,
+      "count": 102,
+      "cumulative": 133945
+    },
+    {
+      "score": 292,
+      "count": 100,
+      "cumulative": 134045
+    },
+    {
+      "score": 291,
+      "count": 99,
+      "cumulative": 134144
+    },
+    {
+      "score": 290,
+      "count": 96,
+      "cumulative": 134240
+    },
+    {
+      "score": 289,
+      "count": 94,
+      "cumulative": 134334
+    },
+    {
+      "score": 288,
+      "count": 91,
+      "cumulative": 134425
+    },
+    {
+      "score": 287,
+      "count": 89,
+      "cumulative": 134514
+    },
+    {
+      "score": 286,
+      "count": 87,
+      "cumulative": 134601
+    },
+    {
+      "score": 285,
+      "count": 86,
+      "cumulative": 134687
+    },
+    {
+      "score": 284,
+      "count": 83,
+      "cumulative": 134770
+    },
+    {
+      "score": 283,
+      "count": 81,
+      "cumulative": 134851
+    },
+    {
+      "score": 282,
+      "count": 79,
+      "cumulative": 134930
+    },
+    {
+      "score": 281,
+      "count": 78,
+      "cumulative": 135008
+    },
+    {
+      "score": 280,
+      "count": 76,
+      "cumulative": 135084
+    },
+    {
+      "score": 279,
+      "count": 73,
+      "cumulative": 135157
+    },
+    {
+      "score": 278,
+      "count": 71,
+      "cumulative": 135228
+    },
+    {
+      "score": 277,
+      "count": 70,
+      "cumulative": 135298
+    },
+    {
+      "score": 276,
+      "count": 68,
+      "cumulative": 135366
+    },
+    {
+      "score": 275,
+      "count": 67,
+      "cumulative": 135433
+    },
+    {
+      "score": 274,
+      "count": 64,
+      "cumulative": 135497
+    },
+    {
+      "score": 273,
+      "count": 63,
+      "cumulative": 135560
+    },
+    {
+      "score": 272,
+      "count": 61,
+      "cumulative": 135621
+    },
+    {
+      "score": 271,
+      "count": 59,
+      "cumulative": 135680
+    },
+    {
+      "score": 270,
+      "count": 58,
+      "cumulative": 135738
+    },
+    {
+      "score": 269,
+      "count": 56,
+      "cumulative": 135794
+    },
+    {
+      "score": 268,
+      "count": 54,
+      "cumulative": 135848
+    },
+    {
+      "score": 267,
+      "count": 52,
+      "cumulative": 135900
+    },
+    {
+      "score": 266,
+      "count": 51,
+      "cumulative": 135951
+    },
+    {
+      "score": 265,
+      "count": 49,
+      "cumulative": 136000
+    },
+    {
+      "score": 264,
+      "count": 48,
+      "cumulative": 136048
+    },
+    {
+      "score": 263,
+      "count": 46,
+      "cumulative": 136094
+    },
+    {
+      "score": 262,
+      "count": 45,
+      "cumulative": 136139
+    },
+    {
+      "score": 261,
+      "count": 43,
+      "cumulative": 136182
+    },
+    {
+      "score": 260,
+      "count": 42,
+      "cumulative": 136224
+    },
+    {
+      "score": 259,
+      "count": 40,
+      "cumulative": 136264
+    },
+    {
+      "score": 258,
+      "count": 39,
+      "cumulative": 136303
+    },
+    {
+      "score": 257,
+      "count": 37,
+      "cumulative": 136340
+    },
+    {
+      "score": 256,
+      "count": 36,
+      "cumulative": 136376
+    },
+    {
+      "score": 255,
+      "count": 34,
+      "cumulative": 136410
+    },
+    {
+      "score": 254,
+      "count": 33,
+      "cumulative": 136443
+    },
+    {
+      "score": 253,
+      "count": 32,
+      "cumulative": 136475
+    },
+    {
+      "score": 252,
+      "count": 30,
+      "cumulative": 136505
+    },
+    {
+      "score": 251,
+      "count": 29,
+      "cumulative": 136534
+    },
+    {
+      "score": 250,
+      "count": 28,
+      "cumulative": 136562
+    },
+    {
+      "score": 249,
+      "count": 27,
+      "cumulative": 136589
+    },
+    {
+      "score": 248,
+      "count": 25,
+      "cumulative": 136614
+    },
+    {
+      "score": 247,
+      "count": 24,
+      "cumulative": 136638
+    },
+    {
+      "score": 246,
+      "count": 23,
+      "cumulative": 136661
+    },
+    {
+      "score": 245,
+      "count": 22,
+      "cumulative": 136683
+    },
+    {
+      "score": 244,
+      "count": 21,
+      "cumulative": 136704
+    },
+    {
+      "score": 243,
+      "count": 20,
+      "cumulative": 136724
+    },
+    {
+      "score": 242,
+      "count": 19,
+      "cumulative": 136743
+    },
+    {
+      "score": 241,
+      "count": 18,
+      "cumulative": 136761
+    },
+    {
+      "score": 240,
+      "count": 17,
+      "cumulative": 136778
+    },
+    {
+      "score": 239,
+      "count": 16,
+      "cumulative": 136794
+    },
+    {
+      "score": 238,
+      "count": 15,
+      "cumulative": 136809
+    },
+    {
+      "score": 237,
+      "count": 14,
+      "cumulative": 136823
+    },
+    {
+      "score": 236,
+      "count": 13,
+      "cumulative": 136836
+    },
+    {
+      "score": 235,
+      "count": 13,
+      "cumulative": 136849
+    },
+    {
+      "score": 234,
+      "count": 12,
+      "cumulative": 136861
+    },
+    {
+      "score": 233,
+      "count": 11,
+      "cumulative": 136872
+    },
+    {
+      "score": 232,
+      "count": 11,
+      "cumulative": 136883
+    },
+    {
+      "score": 231,
+      "count": 10,
+      "cumulative": 136893
+    },
+    {
+      "score": 230,
+      "count": 10,
+      "cumulative": 136903
+    },
+    {
+      "score": 229,
+      "count": 9,
+      "cumulative": 136912
+    },
+    {
+      "score": 228,
+      "count": 9,
+      "cumulative": 136921
+    },
+    {
+      "score": 227,
+      "count": 8,
+      "cumulative": 136929
+    },
+    {
+      "score": 226,
+      "count": 8,
+      "cumulative": 136937
+    },
+    {
+      "score": 225,
+      "count": 7,
+      "cumulative": 136944
+    },
+    {
+      "score": 224,
+      "count": 7,
+      "cumulative": 136951
+    },
+    {
+      "score": 223,
+      "count": 7,
+      "cumulative": 136958
+    },
+    {
+      "score": 222,
+      "count": 6,
+      "cumulative": 136964
+    },
+    {
+      "score": 221,
+      "count": 6,
+      "cumulative": 136970
+    },
+    {
+      "score": 220,
+      "count": 6,
+      "cumulative": 136976
+    },
+    {
+      "score": 219,
+      "count": 5,
+      "cumulative": 136981
+    },
+    {
+      "score": 218,
+      "count": 5,
+      "cumulative": 136986
+    },
+    {
+      "score": 217,
+      "count": 5,
+      "cumulative": 136991
+    },
+    {
+      "score": 216,
+      "count": 4,
+      "cumulative": 136995
+    },
+    {
+      "score": 215,
+      "count": 4,
+      "cumulative": 136999
+    },
+    {
+      "score": 214,
+      "count": 4,
+      "cumulative": 137003
+    },
+    {
+      "score": 213,
+      "count": 4,
+      "cumulative": 137007
+    },
+    {
+      "score": 212,
+      "count": 3,
+      "cumulative": 137010
+    },
+    {
+      "score": 211,
+      "count": 3,
+      "cumulative": 137013
+    },
+    {
+      "score": 210,
+      "count": 3,
+      "cumulative": 137016
+    },
+    {
+      "score": 209,
+      "count": 3,
+      "cumulative": 137019
+    },
+    {
+      "score": 208,
+      "count": 3,
+      "cumulative": 137022
+    },
+    {
+      "score": 207,
+      "count": 2,
+      "cumulative": 137024
+    },
+    {
+      "score": 206,
+      "count": 2,
+      "cumulative": 137026
+    },
+    {
+      "score": 205,
+      "count": 2,
+      "cumulative": 137028
+    },
+    {
+      "score": 204,
+      "count": 2,
+      "cumulative": 137030
+    },
+    {
+      "score": 203,
+      "count": 2,
+      "cumulative": 137032
+    },
+    {
+      "score": 202,
+      "count": 2,
+      "cumulative": 137034
+    },
+    {
+      "score": 201,
+      "count": 2,
+      "cumulative": 137036
+    },
+    {
+      "score": 200,
+      "count": 1,
+      "cumulative": 137037
+    }
+  ]
+}
